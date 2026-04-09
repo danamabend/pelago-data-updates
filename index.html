@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Team Updates — Pelago</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Roboto+Slab:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #FFF4DC;
+      color: #212633;
+      min-height: 100vh;
+    }
+
+    :root {
+      --yello:   #FAE355;
+      --black:   #212633;
+      --white:   #FFFFFF;
+      --maroon:  #722F49;
+      --moss:    #4D6525;
+      --cerulean:#A4BDFF;
+      --tea:     #DDF1C4;
+      --mist:    #E8EEFF;
+      --tan:     #BDA98C;
+      --peach:   #FCD3BF;
+      --cream:   #FFF4DC;
+      --punch:   #EEBCFF;
+    }
+
+    /* ── Nav ── */
+    .navbar {
+      background: var(--black);
+      padding: 0 40px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .navbar-logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--yello);
+      border-radius: 50% 50% 50% 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--black);
+    }
+    .navbar-logo-text {
+      font-family: 'Roboto Slab', serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--white);
+    }
+    .navbar-badge {
+      background: var(--maroon);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--black);
+      padding: 60px 40px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: var(--yello);
+      opacity: 0.06;
+      border-radius: 50% 60% 40% 55%;
+      top: -180px; right: -100px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 200px;
+      background: var(--maroon);
+      opacity: 0.1;
+      border-radius: 60% 40% 55% 50%;
+      bottom: -60px; left: 60px;
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--yello);
+      margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: 'Roboto Slab', serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .hero-title span { color: var(--yello); }
+    .hero-sub {
+      color: rgba(255,255,255,0.55);
+      font-size: 15px;
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* ── Main ── */
+    .main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Year group ── */
+    .year-group { margin-bottom: 48px; }
+    .year-label {
+      font-family: 'Roboto Slab', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--tan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(189,169,140,0.3);
+    }
+
+    /* ── Update cards ── */
+    .updates-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .update-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 12px rgba(33,38,51,0.05);
+      border: 1.5px solid transparent;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .update-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(33,38,51,0.1);
+      border-color: var(--yello);
+    }
+    .update-card.latest::before {
+      content: 'Latest';
+      position: absolute;
+      top: 16px; right: 20px;
+      background: var(--yello);
+      color: var(--black);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .card-month-block {
+      background: var(--black);
+      border-radius: 12px;
+      width: 60px;
+      min-width: 60px;
+      height: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+    .card-month-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--yello);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .card-month-year {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .card-body { flex: 1; min-width: 0; }
+    .card-title {
+      font-family: 'Roboto Slab', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 5px;
+    }
+    .card-summary {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+    .tag.green  { background: var(--tea);  color: var(--moss); }
+    .tag.blue   { background: var(--mist); color: #3a4fb5; }
+    .tag.purple { background: #f5e8ff;     color: #6b3fa0; }
+    .tag.peach  { background: var(--peach); color: #9a4200; }
+
+    .card-arrow {
+      color: var(--tan);
+      font-size: 20px;
+      font-weight: 300;
+      transition: transform 0.15s, color 0.15s;
+    }
+    .update-card:hover .card-arrow {
+      transform: translateX(4px);
+      color: var(--maroon);
+    }
+
+    /* ── Coming soon card ── */
+    .update-card.coming-soon {
+      background: rgba(255,255,255,0.5);
+      border: 1.5px dashed var(--tan);
+      cursor: default;
+      pointer-events: none;
+    }
+    .update-card.coming-soon .card-month-block {
+      background: rgba(33,38,51,0.12);
+    }
+    .update-card.coming-soon .card-month-name { color: var(--tan); }
+    .update-card.coming-soon .card-title { color: var(--tan); }
+    .coming-soon-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--tan);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── How to add ── */
+    .how-to {
+      background: var(--black);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-top: 48px;
+    }
+    .how-to-title {
+      font-family: 'Roboto Slab', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--yello);
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+    .how-to ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      counter-reset: steps;
+    }
+    .how-to ol li {
+      counter-increment: steps;
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+      align-items: flex-start;
+    }
+    .how-to ol li::before {
+      content: counter(steps);
+      background: var(--maroon);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .how-to ol li code {
+      background: rgba(255,255,255,0.1);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--yello);
+      font-family: monospace;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--black);
+      padding: 28px 40px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer strong { color: var(--yello); }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a class="navbar-logo" href="#">
+      <div class="navbar-logo-mark">P</div>
+      <span class="navbar-logo-text">Pelago</span>
+    </a>
+    <span class="navbar-badge">Data Team</span>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Data Team · Monthly Updates</div>
+      <h1 class="hero-title">What we've <span>shipped.</span></h1>
+      <p class="hero-sub">Monthly data impact updates — what we built, what shifted, and what's coming next.</p>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="year-group">
+      <div class="year-label">2026</div>
+      <div class="updates-list">
+
+        <!-- TEMPLATE: Copy this block each month and update the href, month, title, summary, and tags -->
+
+        <!-- April (coming soon) -->
+        <div class="update-card coming-soon">
+          <div class="card-month-block">
+            <span class="card-month-name">Apr</span>
+            <span class="card-month-year">2026</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">April 2026 Data Impact</div>
+            <div class="card-summary">Pangea go-live, Cube onboarding, Spectra refactor...</div>
+          </div>
+          <span class="coming-soon-badge">Coming soon</span>
+        </div>
+
+        <!-- March (live) -->
+        <a class="update-card latest" href="march-2026-data-impact.html">
+          <div class="card-month-block">
+            <span class="card-month-name">Mar</span>
+            <span class="card-month-year">2026</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">March 2026 Data Impact</div>
+            <div class="card-summary">Pangea readiness, Cube foundations, QA automation expansion, and high-volume operational support.</div>
+            <div class="card-tags">
+              <span class="tag green">Pangea</span>
+              <span class="tag blue">Cube</span>
+              <span class="tag purple">QA Automation</span>
+              <span class="tag peach">Eligibility</span>
+            </div>
+          </div>
+          <span class="card-arrow">→</span>
+        </a>
+
+        <!-- ADD NEW MONTHS ABOVE THIS LINE -->
+
+      </div>
+    </div>
+
+    <!-- How to add a new month -->
+    <div class="how-to">
+      <div class="how-to-title">↓ How to add next month's update</div>
+      <ol>
+        <li>Create your new HTML file and name it <code>april-2026-data-impact.html</code></li>
+        <li>Upload both files to the repo (the new HTML + this updated <code>index.html</code>)</li>
+        <li>In this file, copy the March card block, update the month, href, title, summary, and tags</li>
+        <li>Move the <code>latest</code> badge to the new card and remove the coming-soon placeholder</li>
+        <li>Commit — the landing page updates automatically</li>
+      </ol>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p><strong>Pelago</strong> Data Team &nbsp;·&nbsp; Internal use only</p>
+  </footer>
+
+</body>
+</html>
