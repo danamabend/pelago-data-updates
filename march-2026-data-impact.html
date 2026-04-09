@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>March 2026 Data Impact — Pelago</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Roboto+Slab:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #FFF4DC;
+      color: #212633;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Brand tokens ── */
+    :root {
+      --yello:   #FAE355;
+      --black:   #212633;
+      --white:   #FFFFFF;
+      --maroon:  #722F49;
+      --moss:    #4D6525;
+      --cerulean:#A4BDFF;
+      --punch:   #EEBCFF;
+      --tea:     #DDF1C4;
+      --mist:    #E8EEFF;
+      --tan:     #BDA98C;
+      --peach:   #FCD3BF;
+      --cream:   #FFF4DC;
+      --radius:  18px;
+    }
+
+    /* ── Nav bar ── */
+    .navbar {
+      background: var(--black);
+      padding: 0 40px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .navbar-logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--yello);
+      border-radius: 50% 50% 50% 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--black);
+      letter-spacing: -0.5px;
+    }
+    .navbar-logo-text {
+      font-family: 'Roboto Slab', serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+    .navbar-badge {
+      background: var(--maroon);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--black);
+      padding: 60px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: var(--yello);
+      opacity: 0.08;
+      border-radius: 50% 60% 40% 55%;
+      top: -120px;
+      right: -80px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background: var(--maroon);
+      opacity: 0.12;
+      border-radius: 55% 40% 60% 45%;
+      bottom: -80px;
+      left: 100px;
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--yello);
+      margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: 'Roboto Slab', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    .hero-title span {
+      color: var(--yello);
+    }
+    .hero-sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 15px;
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.75);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .hero-chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--yello);
+    }
+
+    /* ── Main layout ── */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Section headings ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 20px;
+    }
+
+    /* ── Summary banner ── */
+    .summary-banner {
+      background: var(--white);
+      border-left: 4px solid var(--yello);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 48px;
+      box-shadow: 0 2px 16px rgba(33,38,51,0.06);
+    }
+    .summary-banner p {
+      font-size: 15px;
+      color: #444a5a;
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    /* ── Status cards grid ── */
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+    .status-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px 20px 18px;
+      box-shadow: 0 2px 12px rgba(33,38,51,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .status-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(33,38,51,0.1);
+    }
+    .status-card-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+    .status-card-name {
+      font-family: 'Roboto Slab', serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.4;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+    .status-pill.done {
+      background: var(--tea);
+      color: var(--moss);
+    }
+    .status-pill.in-progress {
+      background: #FFF3CD;
+      color: #8a6400;
+    }
+    .status-pill::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+    .status-pill.done::before { background: var(--moss); }
+    .status-pill.in-progress::before { background: #f0a500; }
+
+    /* ── Two-column section ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+    @media (max-width: 680px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    /* ── Content card ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 2px 16px rgba(33,38,51,0.06);
+    }
+    .card-title {
+      font-family: 'Roboto Slab', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-callout {
+      background: var(--mist);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #404870;
+      margin: 14px 0 18px;
+      font-style: italic;
+      line-height: 1.6;
+    }
+    .card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .card ul li {
+      font-size: 14px;
+      color: #3a3f52;
+      line-height: 1.6;
+      padding-left: 18px;
+      position: relative;
+    }
+    .card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--maroon);
+      font-weight: 700;
+    }
+    .card ul li strong {
+      color: var(--black);
+    }
+    .card ul li .arrow-note {
+      display: block;
+      font-size: 12px;
+      color: #7a8099;
+      margin-top: 3px;
+      padding-left: 0;
+      font-style: italic;
+    }
+
+    /* Next month card uses a different accent */
+    .card.next .card-callout { background: #FFF3CD; color: #7a5200; }
+    .card.next ul li::before { color: var(--moss); content: '↗'; }
+
+    /* ── Priority shifts card ── */
+    .card.priorities .card-callout {
+      background: var(--peach);
+      color: #7a3300;
+    }
+    .card.priorities ul li::before { content: '◆'; font-size: 10px; top: 4px; color: var(--maroon); }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--black);
+      padding: 32px 40px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer strong { color: var(--yello); }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--tan), transparent);
+      margin: 40px 0;
+      opacity: 0.4;
+    }
+
+    /* ── Floating islands decoration ── */
+    .island-bg {
+      position: relative;
+    }
+    .island-bg::before {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 90px;
+      background: var(--cerulean);
+      opacity: 0.1;
+      border-radius: 50%;
+      top: -30px;
+      right: -40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="navbar">
+    <a class="navbar-logo" href="#">
+      <div class="navbar-logo-mark">P</div>
+      <span class="navbar-logo-text">Pelago</span>
+    </a>
+    <span class="navbar-badge">Data Team</span>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Data Team · Monthly Impact</div>
+      <h1 class="hero-title">March 2026<br><span>Data Impact</span></h1>
+      <p class="hero-sub">Pangea readiness, Cube reporting foundations, and QA expansion — while keeping high-volume operational work running across billing, eligibility, and campaign systems.</p>
+      <div class="hero-meta">
+        <span class="hero-chip"><span class="hero-chip-dot"></span> Sprint period: March 2026</span>
+        <span class="hero-chip"><span class="hero-chip-dot"></span> 4 workstreams active</span>
+        <span class="hero-chip"><span class="hero-chip-dot"></span> Next: April go-live readiness</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Summary -->
+    <div class="summary-banner">
+      <p>March centered on enabling Pangea's launch and launching Cube to support scalable, self-serve reporting — while maintaining continuity across billing, eligibility, and live campaign systems.</p>
+    </div>
+
+    <!-- Workstream status -->
+    <div class="section-label">Workstream Status</div>
+    <div class="status-grid">
+      <div class="status-card">
+        <div class="status-card-icon">🧠</div>
+        <div class="status-card-name">Member Strategy / Journey Dashboard</div>
+        <span class="status-pill done">Done — hold updates</span>
+      </div>
+      <div class="status-card">
+        <div class="status-card-icon">📦</div>
+        <div class="status-card-name">Product &amp; Ops</div>
+        <span class="status-pill in-progress">In Progress / Review</span>
+      </div>
+      <div class="status-card">
+        <div class="status-card-icon">🧱</div>
+        <div class="status-card-name">Data Platform</div>
+        <span class="status-pill in-progress">In Progress / Review</span>
+      </div>
+      <div class="status-card">
+        <div class="status-card-icon">🏢</div>
+        <div class="status-card-name">Executive / G&amp;A</div>
+        <span class="status-pill in-progress">In Progress / Review</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- What happened / What's next -->
+    <div class="section-label">This Month vs. Next</div>
+    <div class="two-col">
+
+      <div class="card island-bg">
+        <div class="card-title">✅ What happened in March</div>
+        <div class="card-callout">March is centered on enabling Pangea's launch and launching Cube to support scalable, self-serve reporting.</div>
+        <ul>
+          <li>
+            <strong>Pangea prioritized across billing, eligibility, and campaign readiness</strong>
+            <span class="arrow-note">Positions the business for a successful 4/1 launch and scalable campaign execution.</span>
+          </li>
+          <li>
+            <strong>Cube reporting foundations significantly progressed</strong> — most Top P1 assets delivered, P2/P3 design underway
+            <span class="arrow-note">Establishes the foundation for consistent, trusted self-service analytics.</span>
+          </li>
+          <li>
+            <strong>QA automation expanded</strong> across tobacco surcharge alerts, Spectra QA, and ROI validation
+            <span class="arrow-note">Reduces reporting and billing risk as delivery volume increases.</span>
+          </li>
+          <li>
+            <strong>Member Strategy metrics refined</strong> to close key engagement and progression data gaps
+            <span class="arrow-note">Enables better decisions on where interventions drive impact.</span>
+          </li>
+          <li>
+            <strong>Clinical outcomes and KPI alignment advanced</strong> across reporting
+            <span class="arrow-note">Strengthens consistency in measurement across Product, Clinical, and Growth.</span>
+          </li>
+          <li>
+            <strong>High-volume operational support maintained</strong> — data feeds, claims, Iterable, Typeform, Sendoso, billing fixes
+          </li>
+        </ul>
+      </div>
+
+      <div class="card next">
+        <div class="card-title">⏭️ What's on deck in April</div>
+        <div class="card-callout">April focuses on activating what's been built — ensuring new capabilities are usable, scalable, and tied to business outcomes.</div>
+        <ul>
+          <li>Finalize <strong>Pangea go-live readiness</strong> across billing, eligibility, and marketing workflows</li>
+          <li>Begin <strong>Cube user onboarding and validation</strong>, enabling feedback and broader adoption</li>
+          <li>Re-architect <strong>Spectra into the Cube semantic layer</strong> to unify reporting and support scalable BI tooling</li>
+          <li>Advance <strong>product analytics (CMv3 + Amazon engagement)</strong> to better understand member behavior</li>
+          <li>Continue <strong>QA automation expansion</strong> to support scaling data usage</li>
+          <li>Begin <strong>eligibility and supplemental file refactor</strong></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Priority shifts -->
+    <div class="card priorities">
+      <div class="card-title">◆ Notable changes in priorities</div>
+      <div class="card-callout">Shifting from balanced roadmap execution to Pangea-driven prioritization shaped much of how the sprint unfolded in March.</div>
+      <ul>
+        <li>Shifted from balanced roadmap execution to <strong>Pangea-driven prioritization</strong>, with billing and eligibility work leading sprint sequencing</li>
+        <li>Increased focus on <strong>QA and data validation</strong>, driven by billing accuracy, campaign dependencies, and warehouse test failures</li>
+        <li>Elevated <strong>operational investigations and campaign support</strong> (Typeform, Iterable, Sendoso) to maintain continuity of live workflows</li>
+        <li>Introduced <strong>platform and data quality work</strong> (Spectra, Tonic, eligibility reconciliation) as prerequisites for scalable reporting and product readiness</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>Pelago Data Team &nbsp;·&nbsp; <strong>March 2026</strong> &nbsp;·&nbsp; Internal use only</p>
+  </footer>
+
+</body>
+</html>
