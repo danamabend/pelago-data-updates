@@ -285,60 +285,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* ── How to add ── */
-    .how-to {
-      background: var(--black);
-      border-radius: 16px;
-      padding: 28px 32px;
-      margin-top: 48px;
-    }
-    .how-to-title {
-      font-family: 'Roboto Slab', serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--yello);
-      margin-bottom: 12px;
-      letter-spacing: 0.3px;
-    }
-    .how-to ol {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      counter-reset: steps;
-    }
-    .how-to ol li {
-      counter-increment: steps;
-      display: flex;
-      gap: 12px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.5;
-      align-items: flex-start;
-    }
-    .how-to ol li::before {
-      content: counter(steps);
-      background: var(--maroon);
-      color: white;
-      font-size: 11px;
-      font-weight: 700;
-      width: 20px;
-      min-width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 1px;
-    }
-    .how-to ol li code {
-      background: rgba(255,255,255,0.1);
-      padding: 1px 6px;
-      border-radius: 4px;
-      font-size: 12px;
-      color: var(--yello);
-      font-family: monospace;
-    }
 
     /* ── Footer ── */
     .footer {
@@ -416,17 +362,6 @@
       </div>
     </div>
 
-    <!-- How to add a new month -->
-    <div class="how-to">
-      <div class="how-to-title">↓ How to add next month's update</div>
-      <ol>
-        <li>Create your new HTML file and name it <code>april-2026-data-impact.html</code></li>
-        <li>Upload both files to the repo (the new HTML + this updated <code>index.html</code>)</li>
-        <li>In this file, copy the March card block, update the month, href, title, summary, and tags</li>
-        <li>Move the <code>latest</code> badge to the new card and remove the coming-soon placeholder</li>
-        <li>Commit — the landing page updates automatically</li>
-      </ol>
-    </div>
 
   </main>
 
