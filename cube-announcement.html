@@ -218,6 +218,40 @@
     line-height: 1.5;
   }
 
+  /* Rollout status */
+  .rollout {
+    background: var(--tea);
+    border-radius: 20px;
+    padding: 22px 28px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .rollout-badge {
+    background: var(--moss);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .rollout-text {
+    font-size: 15px;
+    color: var(--jet-black);
+    line-height: 1.55;
+  }
+
+  .rollout-text strong {
+    font-weight: 700;
+  }
+
   /* Resources */
   .resources {
     background: var(--mist);
@@ -366,6 +400,11 @@
         <p class="subtitle">A faster, friendlier way for everyone at Pelago to ask questions of our data, without waiting on a SQL query or a dashboard request.</p>
       </div>
     </section>
+
+    <div class="rollout">
+      <span class="rollout-badge">Wave 2</span>
+      <p class="rollout-text"><strong>Where we are in the rollout.</strong> Cube is currently in Wave 2 of a phased rollout, which means access is still being expanded across the company. If you don't have access yet, hang tight. We'll share details on additional waves and how to get added in upcoming updates.</p>
+    </div>
 
     <section class="video-section">
       <div class="section-title">Watch the walkthrough</div>
