@@ -183,6 +183,40 @@
     margin-bottom: 6px;
   }
   .card p { font-size: 15px; margin: 0; color: var(--jet-black); }
+  .card-links {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .card-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--jet-black);
+    color: var(--pelago-yellow);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: transform 0.12s ease, background 0.12s ease;
+  }
+  .card-links a:hover {
+    background: var(--maroon);
+    color: var(--white);
+    transform: translateY(-1px);
+  }
+  .card-links a.outline {
+    background: transparent;
+    color: var(--jet-black);
+    border: 1.5px solid var(--jet-black);
+  }
+  .card-links a.outline:hover {
+    background: var(--jet-black);
+    color: var(--pelago-yellow);
+  }
   .tag {
     display: inline-block;
     background: var(--pelago-yellow);
@@ -323,6 +357,10 @@
         <span class="tag">Cube</span>
         <h4>Cube UAT Wave 1, live · IBX reporting migrated</h4>
         <p>Wave 1 users are testing core semantic views, issues are surfacing as expected, and the validation loop is working as designed. Wave 2 onboarding starts the week of 4/27. Cube AI Enterprise Agent is configured across all semantic views (DE-6700). Independence Blue Cross reporting has been migrated and is running natively in Cube ahead of the broader Looker cutover, the first major client reporting workload on the new semantic layer.</p>
+        <div class="card-links">
+          <a href="https://danamabend.github.io/pelago-data-updates/cube-announcement.html" target="_blank" rel="noopener">📢 Wave 1 Announcement</a>
+          <a href="https://danamabend.github.io/pelago-data-updates/cube/" target="_blank" rel="noopener" class="outline">📚 Knowledge Center</a>
+        </div>
       </div>
       <div class="card">
         <span class="tag moss">Pangea</span>
