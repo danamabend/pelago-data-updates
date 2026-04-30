@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cube Knowledge Center · Pelago</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Roboto+Slab:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pelago-yellow: #FAE355;
+    --jet-black: #212633;
+    --white: #FFFFFF;
+    --maroon: #722F49;
+    --moss-green: #4D6525;
+    --cerulean: #A4BDFF;
+    --punch-pink: #EEBCFF;
+    --tea-green: #DDF1C4;
+    --mist-blue: #E8EEFF;
+    --tan: #BDA98C;
+    --peach: #FCD3BF;
+    --cream: #FFF4DC;
+    --ink-soft: #4a5060;
+    --hairline: rgba(33, 38, 51, 0.12);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    color: var(--jet-black);
+    background: var(--cream);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Roboto Slab', Georgia, serif;
+    color: var(--jet-black);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0 0 0.4em 0;
+  }
+
+  a { color: var(--maroon); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Top bar */
+  .topbar {
+    background: var(--jet-black);
+    color: var(--white);
+    padding: 14px 32px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 14px;
+  }
+  .topbar-brand::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 14px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+  }
+  .topbar-nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .topbar-nav a {
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+  .topbar-nav a:hover {
+    color: var(--pelago-yellow);
+    text-decoration: none;
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--pelago-yellow);
+    padding: 96px 32px 120px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    width: 560px; height: 560px;
+    background: var(--cream);
+    border-radius: 50%;
+    right: -200px; top: -240px;
+    opacity: 0.55;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    width: 320px; height: 320px;
+    background: var(--maroon);
+    border-radius: 50%;
+    left: -120px; bottom: -140px;
+    opacity: 0.95;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--maroon);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 5.5vw, 60px);
+    margin-bottom: 18px;
+    max-width: 880px;
+  }
+  .hero-lead {
+    font-size: 19px;
+    max-width: 700px;
+    color: var(--jet-black);
+    margin-bottom: 28px;
+  }
+  .hero-cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: transform 0.1s ease, background 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--jet-black);
+    color: var(--pelago-yellow);
+  }
+  .btn-primary:hover {
+    background: var(--maroon);
+    color: var(--white);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    background: var(--white);
+    color: var(--jet-black);
+    border: 1px solid var(--hairline);
+  }
+  .btn-secondary:hover {
+    background: var(--cream);
+    text-decoration: none;
+  }
+  .btn-arrow { font-size: 18px; line-height: 1; }
+
+  /* Container */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* Stats strip */
+  .stats {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 28px 32px;
+    margin-top: -64px;
+    box-shadow: 0 8px 32px rgba(33, 38, 51, 0.08);
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .stat-cell { text-align: left; }
+  .stat-num {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--maroon);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* Section */
+  section.block { margin-top: 72px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--jet-black);
+    flex-wrap: wrap;
+  }
+  .section-num {
+    font-family: 'Roboto Slab', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--maroon);
+  }
+  .section-head h2 {
+    font-size: 28px;
+    margin: 0;
+    flex: 1 1 auto;
+  }
+  .section-tag {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+
+  /* Card grid */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: 20px;
+    padding: 26px 28px;
+    text-decoration: none;
+    color: var(--jet-black);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(33, 38, 51, 0.08);
+    border-color: var(--maroon);
+    text-decoration: none;
+  }
+  .card-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+    align-self: flex-start;
+  }
+  .tag-guide { background: var(--mist-blue); color: var(--maroon); }
+  .tag-video { background: var(--punch-pink); color: var(--maroon); }
+  .tag-rules { background: var(--peach); color: #8a3d12; }
+  .tag-data { background: var(--tea-green); color: var(--moss-green); }
+
+  .card h3 {
+    font-size: 19px;
+    margin: 0 0 8px;
+  }
+  .card p {
+    margin: 0 0 18px;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .card-foot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--hairline);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .card-link {
+    color: var(--maroon);
+    font-weight: 600;
+  }
+
+  /* Featured card */
+  .card-featured {
+    background: var(--jet-black);
+    color: var(--white);
+    border: none;
+    grid-column: span 2;
+  }
+  .card-featured h3 { color: var(--white); }
+  .card-featured p { color: rgba(255,255,255,0.78); }
+  .card-featured .card-foot {
+    border-top-color: rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.7);
+  }
+  .card-featured .card-link { color: var(--pelago-yellow); }
+  .card-featured::after {
+    content: "";
+    position: absolute;
+    width: 220px; height: 220px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+    right: -90px; top: -90px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  @media (max-width: 720px) {
+    .card-featured { grid-column: span 1; }
+  }
+
+  /* Video cards */
+  .video-card {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .video-thumb {
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, var(--mist-blue) 0%, var(--punch-pink) 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .video-thumb.alt {
+    background: linear-gradient(135deg, var(--cream) 0%, var(--pelago-yellow) 100%);
+  }
+  .video-thumb.alt2 {
+    background: linear-gradient(135deg, var(--tea-green) 0%, var(--cerulean) 100%);
+  }
+  .play-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--jet-black);
+    color: var(--pelago-yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 6px 18px rgba(33, 38, 51, 0.25);
+  }
+  .video-meta {
+    padding: 18px 22px;
+  }
+  .video-meta h4 {
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
+  .video-meta p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 13.5px;
+  }
+  .video-duration {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(33, 38, 51, 0.85);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  /* Guardrails feature panel */
+  .guardrails-feature {
+    background: var(--maroon);
+    color: var(--white);
+    border-radius: 24px;
+    padding: 44px 48px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .guardrails-feature::before {
+    content: "";
+    position: absolute;
+    width: 280px; height: 280px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+    right: -120px; top: -120px;
+    opacity: 0.18;
+  }
+  .guardrails-feature::after {
+    content: "";
+    position: absolute;
+    width: 180px; height: 180px;
+    background: var(--jet-black);
+    border-radius: 50%;
+    left: -70px; bottom: -90px;
+    opacity: 0.5;
+  }
+  .gf-inner { position: relative; z-index: 1; max-width: 760px; }
+  .guardrails-feature .eyebrow {
+    color: var(--pelago-yellow);
+    margin-bottom: 14px;
+  }
+  .guardrails-feature h3 {
+    color: var(--white);
+    font-size: 28px;
+    margin: 0 0 12px;
+  }
+  .guardrails-feature p {
+    color: rgba(255,255,255,0.88);
+    font-size: 16.5px;
+    margin: 0 0 22px;
+    max-width: 640px;
+    line-height: 1.55;
+  }
+  .gf-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--pelago-yellow);
+    color: var(--jet-black);
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: transform 0.1s ease;
+  }
+  .gf-cta:hover {
+    transform: translateY(-1px);
+    text-decoration: none;
+    background: var(--white);
+  }
+
+  /* Do/Don't (prompting hygiene retained) */
+  .guardrails {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .guardrail-col {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 30px;
+    border: 1px solid var(--hairline);
+  }
+  .guardrail-col.do { border-top: 6px solid var(--moss-green); }
+  .guardrail-col.dont { border-top: 6px solid var(--maroon); }
+  .guardrail-col h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .guardrail-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--white);
+  }
+  .icon-do { background: var(--moss-green); }
+  .icon-dont { background: var(--maroon); }
+  .guardrail-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .guardrail-col li {
+    padding: 12px 0 12px 28px;
+    position: relative;
+    font-size: 15px;
+    border-bottom: 1px solid var(--hairline);
+    line-height: 1.5;
+  }
+  .guardrail-col li:last-child { border-bottom: none; }
+  .guardrail-col.do li::before {
+    content: "✓";
+    position: absolute;
+    left: 0; top: 12px;
+    color: var(--moss-green);
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .guardrail-col.dont li::before {
+    content: "✕";
+    position: absolute;
+    left: 0; top: 12px;
+    color: var(--maroon);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  @media (max-width: 720px) {
+    .guardrails { grid-template-columns: 1fr; }
+    .guardrails-feature { padding: 32px 28px; }
+  }
+
+  /* Cheat sheet */
+  .cheat {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 36px 40px;
+    border: 1px solid var(--hairline);
+  }
+  .cheat-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--maroon);
+    margin-bottom: 8px;
+  }
+  .cheat h3 {
+    font-size: 24px;
+    margin: 0 0 6px;
+  }
+  .cheat-lead {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+  }
+  .pattern-card {
+    background: var(--cream);
+    border: 2px dashed var(--tan);
+    border-radius: 14px;
+    padding: 22px 26px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--jet-black);
+  }
+  .pattern-card strong { color: var(--maroon); }
+  .pattern-card .slot {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 2px 10px;
+    margin: 0 2px;
+    border: 1px solid var(--hairline);
+    display: inline-block;
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .compare-card {
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .compare-card.bad { background: var(--peach); color: #8a3d12; }
+  .compare-card.good { background: var(--tea-green); color: var(--moss-green); }
+  .compare-card .compare-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .compare-card code {
+    font-family: 'Roboto Slab', monospace;
+    color: var(--jet-black);
+    font-size: 14px;
+  }
+  @media (max-width: 720px) {
+    .compare-row { grid-template-columns: 1fr; }
+  }
+
+  /* Pathways */
+  .pathway-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .pathway {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: 18px;
+    padding: 22px 24px;
+    text-decoration: none;
+    color: var(--jet-black);
+    transition: transform 0.12s ease, border-color 0.15s ease;
+  }
+  .pathway:hover {
+    border-color: var(--maroon);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+  .pathway-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--pelago-yellow);
+    color: var(--jet-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  .pathway h4 {
+    font-size: 17px;
+    margin: 0 0 6px;
+  }
+  .pathway p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  @media (max-width: 720px) {
+    .pathway-grid { grid-template-columns: 1fr; }
+  }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  details.faq {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    padding: 18px 22px;
+    transition: border-color 0.15s ease;
+  }
+  details.faq[open] { border-color: var(--maroon); }
+  details.faq summary {
+    font-family: 'Roboto Slab', serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  details.faq summary::-webkit-details-marker { display: none; }
+  details.faq summary::after {
+    content: "+";
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    color: var(--maroon);
+    font-weight: 400;
+    transition: transform 0.15s ease;
+  }
+  details.faq[open] summary::after { content: "−"; }
+  details.faq p {
+    margin: 12px 0 0;
+    font-size: 15px;
+    color: var(--jet-black);
+    line-height: 1.55;
+  }
+
+  /* Footer */
+  footer.site-footer {
+    margin-top: 96px;
+    padding: 48px 32px 56px;
+    background: var(--jet-black);
+    color: var(--white);
+  }
+  footer.site-footer .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 32px;
+  }
+  footer h3 {
+    color: var(--white);
+    font-size: 18px;
+    margin: 0 0 12px;
+  }
+  footer p, footer li {
+    color: rgba(255,255,255,0.78);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  footer ul li { margin-bottom: 8px; }
+  footer a {
+    color: var(--pelago-yellow);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  footer a:hover { text-decoration: underline; }
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 32px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  @media (max-width: 720px) {
+    footer.site-footer .footer-inner { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 420px) {
+    .stats { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .hero { padding: 64px 20px 96px; }
+    .container { padding: 0 20px; }
+    .section-head h2 { font-size: 24px; }
+    .cheat { padding: 26px 24px; }
+    .topbar { padding: 12px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-brand">Pelago · Data &amp; Analytics</div>
+  <nav class="topbar-nav">
+    <a href="#start">Start here</a>
+    <a href="#guides">Guides</a>
+    <a href="#training">Training</a>
+    <a href="guardrails.html">Guardrails</a>
+    <a href="domain-directory.html">Domains</a>
+    <a href="#help">Get help</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Cube Knowledge Center</div>
+    <h1>Everything you need to ask Cube a question and trust the answer.</h1>
+    <p class="hero-lead">Cube is Pelago's natural-language interface to our data. This is the home base for learning how to use it well: prompting guides, training videos, semantic-layer guardrails, and a directory of every domain you can query.</p>
+    <div class="hero-cta-row">
+      <a class="btn btn-primary" href="prompting-best-practices.html">Read the prompting guide <span class="btn-arrow">→</span></a>
+      <a class="btn btn-secondary" href="domain-directory.html">Browse the domain directory</a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-cell">
+      <div class="stat-num">15</div>
+      <div class="stat-label">Data domains you can query</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Best practice guides</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Training video modules</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Place to ask for help</div>
+    </div>
+  </div>
+
+  <!-- START HERE -->
+  <section class="block" id="start">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Start here</h2>
+      <span class="section-tag">Three pathways depending on where you are</span>
+    </div>
+    <div class="pathway-grid">
+      <a class="pathway" href="#training">
+        <div class="pathway-num">1</div>
+        <h4>I'm brand new to Cube</h4>
+        <p>Watch the orientation video. Then come back and skim the prompting guide.</p>
+      </a>
+      <a class="pathway" href="prompting-best-practices.html">
+        <div class="pathway-num">2</div>
+        <h4>I'm getting wrong answers</h4>
+        <p>Jump to the prompting guide and the redirecting prompts section.</p>
+      </a>
+      <a class="pathway" href="domain-directory.html">
+        <div class="pathway-num">3</div>
+        <h4>I don't know which domain to use</h4>
+        <p>Open the domain directory. Each card walks you through what it tracks.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- GUIDES -->
+  <section class="block" id="guides">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Best practice guides</h2>
+      <span class="section-tag">How to write prompts that return reliable answers</span>
+    </div>
+    <div class="card-grid">
+
+      <a class="card card-featured" href="prompting-best-practices.html">
+        <span class="card-tag tag-guide" style="background:var(--pelago-yellow); color:var(--jet-black);">Featured guide</span>
+        <h3>Prompting Best Practices for Cube</h3>
+        <p>The full playbook. Prompt structure patterns, schema-aligned language, what to do when results are wrong, and a practical checklist for every query.</p>
+        <div class="card-foot">
+          <span>~10 min read</span>
+          <span class="card-link">Read the guide →</span>
+        </div>
+      </a>
+
+      <a class="card" href="prompting-best-practices.html#section-1">
+        <span class="card-tag tag-guide">Quick reference</span>
+        <h3>The prompt structure pattern</h3>
+        <p>Show [metric] by [dimension] over [time range], filtered to [conditions], where [definitions]. The five slots that make every query land.</p>
+        <div class="card-foot">
+          <span>2 min</span>
+          <span class="card-link">See pattern →</span>
+        </div>
+      </a>
+
+      <a class="card" href="prompting-best-practices.html#section-2">
+        <span class="card-tag tag-guide">Troubleshooting</span>
+        <h3>Redirecting wrong results</h3>
+        <p>Wrong metric, wrong filter, wrong join? Step-by-step refinements that get you back to the right answer without starting over.</p>
+        <div class="card-foot">
+          <span>4 min</span>
+          <span class="card-link">Read more →</span>
+        </div>
+      </a>
+
+      <a class="card" href="prompting-best-practices.html#section-3">
+        <span class="card-tag tag-guide">Checklist</span>
+        <h3>Pre-submit prompt checklist</h3>
+        <p>Five questions to ask yourself before hitting send. The fastest way to catch ambiguous prompts before they become wrong answers.</p>
+        <div class="card-foot">
+          <span>1 min</span>
+          <span class="card-link">View checklist →</span>
+        </div>
+      </a>
+
+      <a class="card" href="prompting-best-practices.html#section-5">
+        <span class="card-tag tag-guide">Advanced</span>
+        <h3>Use an LLM to refine first</h3>
+        <p>When and why to ask another LLM to sharpen your prompt before sending it to Cube. Useful for multi-filter, multi-metric questions.</p>
+        <div class="card-foot">
+          <span>3 min</span>
+          <span class="card-link">Read more →</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- TRAINING VIDEOS -->
+  <section class="block" id="training">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Training videos</h2>
+      <span class="section-tag">Watch first, prompt second</span>
+    </div>
+    <div class="card-grid">
+
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="play-icon">▶</div>
+          <span class="video-duration">8:42</span>
+        </div>
+        <div class="video-meta">
+          <span class="card-tag tag-video">Module 1 · Orientation</span>
+          <h4>What Cube is and how to ask your first question</h4>
+          <p>A 90-second tour of the interface, then a walk through three example prompts.</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb alt">
+          <div class="play-icon">▶</div>
+          <span class="video-duration">11:17</span>
+        </div>
+        <div class="video-meta">
+          <span class="card-tag tag-video">Module 2 · Prompting</span>
+          <h4>Writing prompts that map to the schema</h4>
+          <p>Live walkthrough of the prompt structure pattern with real Pelago examples and the exact wording to copy.</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb alt2">
+          <div class="play-icon">▶</div>
+          <span class="video-duration">6:55</span>
+        </div>
+        <div class="video-meta">
+          <span class="card-tag tag-video">Module 3 · Recovery</span>
+          <h4>What to do when Cube returns the wrong answer</h4>
+          <p>The redirect playbook. How to spot a bad result fast and refine your way to the right one.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GUARDRAILS -->
+  <section class="block" id="guardrails-section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Guardrails</h2>
+      <span class="section-tag">How to use Cube responsibly, and why we don't go around it</span>
+    </div>
+
+    <a class="guardrails-feature" href="guardrails.html" style="display:block;">
+      <div class="gf-inner">
+        <div class="eyebrow">Read first · Semantic layer guardrails</div>
+        <h3>Use the semantic layer. Don't reinvent the joins.</h3>
+        <p>Why Cube exists, what it costs us when queries get hand-rolled against the marts in BI tools or notebooks, and what to do when Cube can't answer your question. The single most important page in this center if you ever touch our data tooling.</p>
+        <span class="gf-cta">Read the guardrails →</span>
+      </div>
+    </a>
+
+    <div class="guardrails">
+      <div class="guardrail-col do">
+        <h3><span class="guardrail-icon icon-do">✓</span>Day-to-day do's</h3>
+        <ul>
+          <li>Reference fields and values explicitly when you know them. Use real schema names.</li>
+          <li>Specify the time field, granularity, and range every time. Time errors are the most common.</li>
+          <li>Define the metric calculation. "Total revenue defined as sum of order_amount" beats "revenue."</li>
+          <li>If you don't know a field name, describe what it represents and give example values.</li>
+          <li>Treat prompting as iterative. Refine, don't restart, when a result looks off.</li>
+          <li>Cite the source. Cube tells you which data domains it pulled from. Look at it.</li>
+        </ul>
+      </div>
+      <div class="guardrail-col dont">
+        <h3><span class="guardrail-icon icon-dont">✕</span>Day-to-day don'ts</h3>
+        <ul>
+          <li>Don't ask conversationally. "How is revenue doing recently?" is too vague to map cleanly.</li>
+          <li>Don't assume Cube knows your business definitions. Spell out "active users," "completed," etc.</li>
+          <li>Don't use Cube for PHI lookups about a specific identifiable member. Use approved tools.</li>
+          <li>Don't paste a Cube number into a board-level deck without checking the underlying query.</li>
+          <li>Don't write custom SQL against marts in BI tools. <a href="guardrails.html" style="color:var(--maroon); font-weight:600;">See why →</a></li>
+          <li>Don't share Cube outputs externally without going through the standard data review process.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEAT -->
+  <section class="block" id="cheat">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>The pattern, at a glance</h2>
+      <span class="section-tag">The structure every strong prompt follows</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-eyebrow">Memorize this</div>
+      <h3>Use this template every time</h3>
+      <p class="cheat-lead">When you're not sure how to phrase your prompt, drop your question into these five slots first. The clearer you fill each one in, the more reliable the answer.</p>
+
+      <div class="pattern-card">
+        Show <span class="slot"><strong>metric</strong></span> by <span class="slot"><strong>dimension</strong></span> over <span class="slot"><strong>time range</strong></span>, filtered to <span class="slot"><strong>conditions</strong></span>, where <span class="slot"><strong>definitions</strong></span>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-card bad">
+          <span class="compare-label">Conversational · high risk</span>
+          <code>How is revenue doing recently?</code>
+        </div>
+        <div class="compare-card good">
+          <span class="compare-label">Structured · high confidence</span>
+          <code>Show total revenue (sum of order_amount) by week over the last 8 weeks, where order_status = "completed"</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOMAINS -->
+  <section class="block" id="domains">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2>Domain directory</h2>
+      <span class="section-tag">The 15 slices of Pelago data Cube can query</span>
+    </div>
+    <div class="card-grid">
+
+      <a class="card card-featured" href="domain-directory.html">
+        <span class="card-tag tag-data" style="background:var(--pelago-yellow); color:var(--jet-black);">Reference</span>
+        <h3>Pelago Domain Directory</h3>
+        <p>Every Cube domain explained in plain language: what it tracks, how it adds up, and what it connects to. Browse by area or jump straight to a specific domain.</p>
+        <div class="card-foot">
+          <span>15 domains · 4 groups</span>
+          <span class="card-link">Open the directory →</span>
+        </div>
+      </a>
+
+      <a class="card" href="domain-directory.html#sales-pipeline">
+        <span class="card-tag tag-data">Reach &amp; Pipeline</span>
+        <h3>Sales, Eligibility, Growth</h3>
+        <p>Deals we're pursuing, lives we cover, and the path from "never heard of Pelago" to registered member.</p>
+        <div class="card-foot"><span class="card-link">Browse domains →</span></div>
+      </a>
+
+      <a class="card" href="domain-directory.html#member-journey">
+        <span class="card-tag tag-data">Members &amp; Journey</span>
+        <h3>Journey, Engagement, Check-ins, Orders</h3>
+        <p>Who registered, what they're doing in the app, what they self-report, and what we ship them.</p>
+        <div class="card-foot"><span class="card-link">Browse domains →</span></div>
+      </a>
+
+      <a class="card" href="domain-directory.html#appointments">
+        <span class="card-tag tag-data">Care Delivery</span>
+        <h3>Appointments, Forms, Diagnosis, Outcomes</h3>
+        <p>The clinical work itself. Visits, structured notes, diagnoses, and program-level results.</p>
+        <div class="card-foot"><span class="card-link">Browse domains →</span></div>
+      </a>
+
+      <a class="card" href="domain-directory.html#billing">
+        <span class="card-tag tag-data">Revenue &amp; Claims</span>
+        <h3>Billing, Spectra, Claims</h3>
+        <p>What clients owe, the monthly client scoreboard, and the medical claims behind Pelago's ROI story.</p>
+        <div class="card-foot"><span class="card-link">Browse domains →</span></div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block" id="help">
+    <div class="section-head">
+      <span class="section-num">07</span>
+      <h2>FAQ &amp; get help</h2>
+      <span class="section-tag">Common questions answered, plus where to ask the rest</span>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq">
+        <summary>I asked Cube a simple question and got a weird answer. What now?</summary>
+        <p>Open the prompting guide's troubleshooting section. Most "weird" answers fall into one of five buckets: wrong metric, wrong time granularity, missing filter, ambiguous business term, or a join-path issue. Refine, don't restart.</p>
+      </details>
+      <details class="faq">
+        <summary>How do I know which domain my question lives in?</summary>
+        <p>Open the domain directory. Each card describes the building block the domain tracks (e.g. one appointment, one eligible person). Find the one that sounds most like your question and start there.</p>
+      </details>
+      <details class="faq">
+        <summary>Can I just write SQL against the marts in Power BI to get what I need?</summary>
+        <p>Please don't, unless it's an approved exception. Custom queries against our marts bypass the join logic, validation, and version control that Cube provides. They quietly create maintenance debt that surfaces later as broken reports and conflicting numbers. Read the <a href="guardrails.html">semantic layer guardrails</a> for the why and the alternative path.</p>
+      </details>
+      <details class="faq">
+        <summary>Can I trust Cube numbers in a client-facing deck?</summary>
+        <p>Treat Cube numbers as a fast first pass. For anything client-facing or board-facing, route through the standard data review process before publishing. The prompting guide also covers how to verify a result by checking which fields and joins were used.</p>
+      </details>
+      <details class="faq">
+        <summary>Is it safe to look up an individual member in Cube?</summary>
+        <p>No. Cube is for aggregate, analytical questions. Identifiable member lookups go through approved clinical and ops tools, not natural-language analytics.</p>
+      </details>
+      <details class="faq">
+        <summary>I can't tell if Cube used the right join path. Where do I check?</summary>
+        <p>Cube exposes the underlying schema elements it used for each result. If a cross-domain answer looks off, the most likely cause is a join path. Add hints to your prompt ("to use industry_type, you may need to join to the client_profile data set") and rerun.</p>
+      </details>
+      <details class="faq">
+        <summary>Where do I ask if my question isn't here?</summary>
+        <p>Drop a note in <strong>#data-help</strong> on Slack with your prompt and the result you got back. The team will route from there.</p>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h3>Cube Knowledge Center</h3>
+      <p>Pelago's home for learning how to ask better questions of our data. Maintained by the Data &amp; Analytics team.</p>
+      <p style="margin-top:14px;">Have a suggestion? Drop it in <a href="#">#data-help</a>.</p>
+    </div>
+    <div>
+      <h3>Reference</h3>
+      <ul>
+        <li><a href="prompting-best-practices.html">Prompting guide</a></li>
+        <li><a href="domain-directory.html">Domain directory</a></li>
+        <li><a href="guardrails.html">Semantic layer guardrails</a></li>
+        <li><a href="#cheat">Pattern cheat sheet</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Support</h3>
+      <ul>
+        <li><a href="#help">FAQ</a></li>
+        <li><a href="#training">Training videos</a></li>
+        <li><a href="#">#data-help on Slack</a></li>
+        <li><a href="#">Email Data &amp; Analytics</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Pelago · Virtual clinic for substance use management</span>
+    <span>Cube Knowledge Center · Last updated April 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>

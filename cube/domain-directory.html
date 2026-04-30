@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pelago Domain Directory — A simple guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Roboto+Slab:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pelago-yellow: #FAE355;
+    --jet-black: #212633;
+    --white: #FFFFFF;
+    --maroon: #722F49;
+    --moss-green: #4D6525;
+    --cerulean: #A4BDFF;
+    --punch-pink: #EEBCFF;
+    --tea-green: #DDF1C4;
+    --mist-blue: #E8EEFF;
+    --tan: #BDA98C;
+    --peach: #FCD3BF;
+    --cream: #FFF4DC;
+    --ink-soft: #4a5060;
+    --hairline: rgba(33, 38, 51, 0.12);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    color: var(--jet-black);
+    background: var(--cream);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Roboto Slab', Georgia, serif;
+    color: var(--jet-black);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0 0 0.4em 0;
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    background: var(--pelago-yellow);
+    padding: 80px 32px 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    width: 520px; height: 520px;
+    background: var(--cream);
+    border-radius: 50%;
+    right: -180px; top: -200px;
+    opacity: 0.6;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    width: 280px; height: 280px;
+    background: var(--maroon);
+    border-radius: 50%;
+    left: -100px; bottom: -120px;
+    opacity: 0.95;
+  }
+  .hero-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .eyebrow {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--maroon);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 5vw, 52px);
+    margin-bottom: 16px;
+    max-width: 820px;
+  }
+  .hero p {
+    font-size: 18px;
+    max-width: 680px;
+    color: var(--jet-black);
+  }
+
+  /* ---- Container ---- */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---- Intro ---- */
+  .intro {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 32px 36px;
+    margin-top: -56px;
+    box-shadow: 0 8px 32px rgba(33, 38, 51, 0.08);
+    position: relative;
+    z-index: 2;
+  }
+  .intro h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  .intro > p {
+    font-size: 16px;
+    color: var(--jet-black);
+    margin: 0 0 14px;
+  }
+
+  .pattern-block {
+    background: var(--cream);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-top: 18px;
+  }
+  .pattern-block h3 {
+    font-size: 16px;
+    margin-bottom: 14px;
+    color: var(--maroon);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+  }
+  .pattern-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 8px 0;
+  }
+  .pattern-row + .pattern-row {
+    border-top: 1px dashed var(--hairline);
+  }
+  .pattern-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--jet-black);
+    color: var(--pelago-yellow);
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .pattern-text { font-size: 15px; color: var(--jet-black); }
+  .pattern-text strong { color: var(--maroon); }
+
+  .meet-jane {
+    background: var(--mist-blue);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-top: 14px;
+    font-size: 15px;
+  }
+  .meet-jane strong { color: var(--maroon); }
+
+  /* ---- Quick Nav ---- */
+  .quick-nav {
+    margin-top: 32px;
+    padding: 24px 28px;
+    background: var(--white);
+    border-radius: 24px;
+    border: 1px solid var(--hairline);
+  }
+  .quick-nav h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 6px;
+  }
+  .nav-link {
+    text-decoration: none;
+    color: var(--jet-black);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background 0.15s ease;
+  }
+  .nav-link:hover { background: var(--cream); }
+
+  /* ---- Section header ---- */
+  .group { margin-top: 64px; }
+  .group-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--jet-black);
+  }
+  .group-num {
+    font-family: 'Roboto Slab', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--maroon);
+  }
+  .group-header h2 {
+    font-size: 28px;
+    margin: 0;
+    flex: 1;
+  }
+  .group-tag {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+
+  /* ---- Domain card ---- */
+  .domain {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 18px;
+    border: 1px solid var(--hairline);
+  }
+
+  .domain-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .domain-head h3 {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .pill-active { background: var(--tea-green); color: var(--moss-green); }
+  .pill-tbd { background: var(--peach); color: #8a3d12; }
+
+  .domain-tagline {
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+  }
+
+  /* ---- The 3-step layout ---- */
+  .steps {
+    margin: 0 0 18px 0;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 16px 18px;
+    align-items: flex-start;
+  }
+  .step + .step { border-top: 1px solid var(--hairline); }
+
+  .step-1 { background: var(--cream); }
+  .step-2 { background: #FFFAEA; }
+  .step-3 { background: var(--mist-blue); }
+
+  .step-bullet {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+  }
+  .step-1 .step-bullet { background: var(--maroon); }
+  .step-2 .step-bullet { background: #c69415; }
+  .step-3 .step-bullet { background: #4a6bd1; }
+
+  .step-body { flex: 1; min-width: 0; }
+  .step-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--jet-black);
+    opacity: 0.65;
+    margin-bottom: 4px;
+  }
+  .step-text {
+    font-size: 15.5px;
+    color: var(--jet-black);
+  }
+  .step-text strong { font-weight: 600; }
+  .step-eg {
+    display: block;
+    margin-top: 8px;
+    color: var(--ink-soft);
+    font-style: italic;
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+  .step-eg::before {
+    content: "Example: ";
+    font-style: normal;
+    font-weight: 600;
+    color: var(--maroon);
+  }
+  .step-list {
+    margin: 8px 0 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .step-list li {
+    font-size: 14.5px;
+    color: var(--jet-black);
+    padding: 3px 0 3px 16px;
+    position: relative;
+  }
+  .step-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0; top: 3px;
+    color: var(--maroon);
+    font-weight: 700;
+  }
+  .step-note {
+    margin: 10px 0 0 0;
+    padding: 8px 12px 8px 28px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+    background: rgba(255,255,255,0.5);
+    border-radius: 8px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .step-note::before {
+    content: "↳";
+    position: absolute;
+    left: 12px; top: 8px;
+    font-style: normal;
+    color: var(--maroon);
+    font-weight: 700;
+  }
+  .step-note em { font-style: italic; }
+
+  /* ---- Questions ---- */
+  .ask-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--maroon);
+    margin: 6px 0 6px;
+  }
+  .questions {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+  }
+  .questions li {
+    position: relative;
+    padding: 5px 0 5px 22px;
+    font-size: 15px;
+    color: var(--jet-black);
+  }
+  .questions li::before {
+    content: "•";
+    position: absolute;
+    left: 6px; top: 5px;
+    color: var(--maroon);
+    font-weight: 700;
+  }
+
+  .usedby {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--mist-blue);
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-top: 4px;
+  }
+  .usedby strong { color: var(--jet-black); font-weight: 600; }
+
+  .tbd-note {
+    background: var(--peach);
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #8a3d12;
+    margin-top: 12px;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 72px;
+    padding: 48px 32px 56px;
+    background: var(--jet-black);
+    color: var(--white);
+    text-align: center;
+  }
+  footer h3 {
+    color: var(--white);
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  footer p {
+    color: rgba(255,255,255,0.78);
+    max-width: 640px;
+    margin: 0 auto 8px;
+    font-size: 15px;
+  }
+  footer a {
+    color: var(--pelago-yellow);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  /* ---- Design concept section ---- */
+  .concept {
+    margin-top: 32px;
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px 36px;
+    border: 1px solid var(--hairline);
+  }
+  .concept-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--maroon);
+    margin-bottom: 12px;
+  }
+  .concept h2 {
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+  .concept-lead {
+    font-size: 17px;
+    max-width: 700px;
+    color: var(--ink-soft);
+    margin: 0 0 36px;
+  }
+  .concept h3 {
+    font-size: 13px;
+    margin: 0 0 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    color: var(--jet-black);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .concept h4 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+  .concept-block + .concept-block { margin-top: 36px; }
+
+  .tension-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .tension-card {
+    border-radius: 14px;
+    padding: 22px 22px;
+    border: 1px solid var(--hairline);
+  }
+  .tension-card.cream { background: var(--cream); }
+  .tension-card.blue { background: var(--mist-blue); }
+  .tension-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--maroon);
+    margin-bottom: 6px;
+  }
+  .tension-card p {
+    font-size: 14.5px;
+    color: var(--jet-black);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .stage-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .stage {
+    border-radius: 14px;
+    padding: 22px 24px;
+    border: 1px solid var(--hairline);
+  }
+  .stage-front { background: var(--pelago-yellow); }
+  .stage-back { background: var(--mist-blue); }
+  .stage-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--maroon);
+    margin-bottom: 12px;
+  }
+  .orchestrator-pill {
+    display: inline-block;
+    background: var(--jet-black);
+    color: var(--pelago-yellow);
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .stage p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--jet-black);
+    line-height: 1.55;
+  }
+  .specialists {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .specialist-chip {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    color: var(--jet-black);
+  }
+  .stage-arrow {
+    text-align: center;
+    font-size: 22px;
+    color: var(--maroon);
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 0;
+  }
+  .ceo-analogy {
+    margin-top: 18px;
+    padding: 14px 18px;
+    background: var(--cream);
+    border-radius: 12px;
+    font-size: 14.5px;
+    color: var(--jet-black);
+    line-height: 1.55;
+  }
+  .ceo-analogy strong { color: var(--maroon); }
+
+  .when-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 15px;
+  }
+  .when-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .when-table tr:last-child td { border-bottom: none; }
+  .when-table td:first-child {
+    width: 55%;
+    background: var(--cream);
+    border-radius: 10px 0 0 10px;
+    color: var(--jet-black);
+  }
+  .when-table td:last-child {
+    color: var(--maroon);
+    font-weight: 600;
+  }
+
+  .insight {
+    background: var(--jet-black);
+    border-radius: 16px;
+    padding: 30px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .insight::before {
+    content: "";
+    position: absolute;
+    width: 220px; height: 220px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+    right: -90px; top: -90px;
+    opacity: 0.18;
+  }
+  .insight::after {
+    content: "";
+    position: absolute;
+    width: 140px; height: 140px;
+    background: var(--maroon);
+    border-radius: 50%;
+    left: -50px; bottom: -60px;
+    opacity: 0.7;
+  }
+  .insight-body { position: relative; z-index: 1; }
+  .insight-body p {
+    color: var(--white);
+    font-family: 'Roboto Slab', serif;
+    font-size: 19px;
+    line-height: 1.45;
+    margin: 0;
+    max-width: 640px;
+  }
+  .insight-tagline {
+    margin-top: 18px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--pelago-yellow);
+  }
+
+  .pitfall-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .pitfall-list li {
+    position: relative;
+    padding: 10px 0 10px 28px;
+    font-size: 15px;
+    color: var(--jet-black);
+    border-bottom: 1px solid var(--hairline);
+    line-height: 1.55;
+  }
+  .pitfall-list li:last-child { border-bottom: none; }
+  .pitfall-list li::before {
+    content: "✕";
+    position: absolute;
+    left: 0; top: 10px;
+    color: var(--maroon);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .concept-bridge {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 2px dashed var(--hairline);
+    font-size: 15px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  @media print {
+    body { background: white; }
+    .hero::before, .hero::after { display: none; }
+    .insight::before, .insight::after { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 56px 20px 80px; }
+    .container { padding: 0 20px; }
+    .intro, .quick-nav, .domain { padding: 22px 22px; }
+    .domain-head h3 { font-size: 20px; }
+    .step { padding: 14px 14px; gap: 12px; }
+    .step-bullet { width: 28px; height: 28px; font-size: 13px; }
+    .concept { padding: 28px 22px; }
+    .tension-grid { grid-template-columns: 1fr; }
+    .when-table td:first-child { width: 60%; }
+    .insight { padding: 24px 22px; }
+    .insight-body p { font-size: 17px; }
+  }
+
+  /* ---- Top nav (added) ---- */
+  .topbar {
+    background: var(--jet-black);
+    color: var(--white);
+    padding: 14px 32px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 14px;
+  }
+  .topbar-brand::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 14px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+  }
+  .topbar a {
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .topbar a:hover { color: var(--pelago-yellow); }
+</style>
+</head>
+<body>
+
+<!-- ============== TOP BAR ============== -->
+<div class="topbar">
+  <div class="topbar-brand">Pelago · Cube Knowledge Center</div>
+  <nav style="display:flex; gap:20px; flex-wrap:wrap;">
+    <a href="index.html">Home</a>
+    <a href="prompting-best-practices.html">Prompting</a>
+    <a href="guardrails.html">Guardrails</a>
+  </nav>
+</div>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Data &amp; Analytics · Domain Directory</div>
+    <h1>A simple guide to Pelago's data domains</h1>
+    <p>Each domain is a focused slice of Pelago data. This page walks through what each one tracks, in plain language, with a real-world example so you can pick the right one.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- ============== INTRO ============== -->
+  <div class="intro">
+    <h2>How to read this page</h2>
+    <p>Every domain card below follows the same three-step pattern. Read it once here, and the rest of the page will feel familiar.</p>
+
+    <div class="pattern-block">
+      <h3>The pattern</h3>
+      <div class="pattern-row">
+        <div class="pattern-num">1</div>
+        <div class="pattern-text"><strong>The building block.</strong> The smallest piece of information the domain tracks. Think of it like a single Lego brick. Every other view in the domain is built by stacking these together.</div>
+      </div>
+      <div class="pattern-row">
+        <div class="pattern-num">2</div>
+        <div class="pattern-text"><strong>How it adds up.</strong> When you stack many building blocks together, what bigger picture can you see? Trends, totals, populations, journeys.</div>
+      </div>
+      <div class="pattern-row">
+        <div class="pattern-num">3</div>
+        <div class="pattern-text"><strong>What it connects to.</strong> The other context you can layer alongside the building blocks. This is how a single fact becomes a richer story (e.g. "this appointment, for this member, working on this diagnosis, paid for by this client").</div>
+      </div>
+    </div>
+
+    <div class="meet-jane">
+      <strong>A note on the examples.</strong> To make things concrete, the examples follow a fictional member named <em>Jane</em>, an employee at a fictional client called <em>Acme Corp</em>. Wherever you see Jane, picture a real Pelago member moving through her care.
+    </div>
+  </div>
+
+  <!-- ============== DESIGN CONCEPT ============== -->
+  <section class="concept" id="design-concept">
+    <div class="concept-eyebrow">The bigger picture</div>
+    <h2>Why we organize data this way</h2>
+    <p class="concept-lead">Why does Pelago slice its data into domains in the first place? As we build toward an AI agent that can answer questions across the whole company, that agent needs structure to draw on. Domains are that structure.</p>
+
+    <!-- Block 1: The tension -->
+    <div class="concept-block">
+      <h3>Two pulls, in opposite directions</h3>
+      <div class="tension-grid">
+        <div class="tension-card cream">
+          <div class="tension-tag">Why specialists</div>
+          <h4>Specialists give better answers.</h4>
+          <p>An agent focused on a single domain has the right schema, the right prompts, the right retrieval. Higher accuracy, lower hallucination, easier to evaluate. The catch: a specialist alone can't answer something cross-functional, like "what's driving member churn across product, support, and billing?"</p>
+        </div>
+        <div class="tension-card blue">
+          <div class="tension-tag">Why one front door</div>
+          <h4>People want one place to ask.</h4>
+          <p>If users have to pick the right agent before they even ask a question, most won't. They'll bail. Cognitive load and wrong routing kill adoption. People need a single conversational interface, not a directory of bots to choose from.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Block 2: Architecture -->
+    <div class="concept-block">
+      <h3>How we resolve it: frontstage and backstage</h3>
+      <p style="margin:0 0 18px; font-size:15px; color:var(--ink-soft);">We split the work in two. What the user sees, and what runs behind it.</p>
+
+      <div class="stage-diagram">
+        <div class="stage stage-front">
+          <div class="stage-label">Frontstage · what the user sees</div>
+          <div class="orchestrator-pill">One enterprise agent</div>
+          <p>Interprets the question. Decides which domains are relevant. Calls one specialist or several. Synthesizes a single, clean answer.</p>
+        </div>
+
+        <div class="stage-arrow">↓</div>
+
+        <div class="stage stage-back">
+          <div class="stage-label">Backstage · how it gets the answer</div>
+          <div class="specialists">
+            <span class="specialist-chip">Sales</span>
+            <span class="specialist-chip">Eligibility</span>
+            <span class="specialist-chip">Member Journey</span>
+            <span class="specialist-chip">Engagement</span>
+            <span class="specialist-chip">Appointments</span>
+            <span class="specialist-chip">Outcomes</span>
+            <span class="specialist-chip">+ more</span>
+          </div>
+          <p>Domain specialists, one per slice of Pelago data. Each has its own retrieval tuned to that data, domain-specific prompts and tools, and returns structured outputs the orchestrator can compose.</p>
+        </div>
+      </div>
+
+      <div class="ceo-analogy">
+        <strong>Mental model:</strong> the user talks to the CEO. The CEO delegates to department heads. Department heads use their teams and tools to dig in. The CEO comes back with the synthesized answer.
+      </div>
+    </div>
+
+    <!-- Block 3: When each layer applies -->
+    <div class="concept-block">
+      <h3>When each layer comes into play</h3>
+      <table class="when-table">
+        <tr>
+          <td>Deep analysis inside one domain</td>
+          <td>One specialist</td>
+        </tr>
+        <tr>
+          <td>Cross-functional question</td>
+          <td>Orchestrator pulls from many</td>
+        </tr>
+        <tr>
+          <td>Simple, direct question</td>
+          <td>Orchestrator handles it</td>
+        </tr>
+        <tr>
+          <td>Power user (analyst)</td>
+          <td>Can hit a specialist directly</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Block 4: The insight -->
+    <div class="concept-block">
+      <div class="insight">
+        <div class="insight-body">
+          <p>The win condition is simple. Users get expert-level answers without ever having to know any of the architecture underneath.</p>
+          <div class="insight-tagline">Frontstage: one agent · Backstage: many</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Block 5: Pitfalls -->
+    <div class="concept-block">
+      <h3>What this lets us avoid</h3>
+      <ul class="pitfall-list">
+        <li>One giant agent loaded with every dataset, which gets noisy and brittle as the data grows</li>
+        <li>Too many visible agents, which becomes a UX nightmare and quietly tanks adoption</li>
+        <li>No orchestration layer, which leads to inconsistent answers and no clear owner of the response</li>
+        <li>Unstructured outputs, which make cross-domain answers nearly impossible to compose cleanly</li>
+      </ul>
+    </div>
+
+    <p class="concept-bridge">The directory below is the menu of those domain specialists. Each card describes one slice of Pelago data: the building block it tracks, how those blocks add up, and what other context they connect to.</p>
+  </section>
+
+  <!-- ============== QUICK NAV ============== -->
+  <div class="quick-nav">
+    <h3>Jump to a domain</h3>
+    <div class="nav-grid">
+      <a class="nav-link" href="#sales-pipeline">→ Sales Pipeline</a>
+      <a class="nav-link" href="#eligibility">→ Eligibility</a>
+      <a class="nav-link" href="#growth">→ Growth</a>
+      <a class="nav-link" href="#member-journey">→ Member Journey</a>
+      <a class="nav-link" href="#engagement">→ Engagement</a>
+      <a class="nav-link" href="#member-check-ins">→ Member Check-Ins</a>
+      <a class="nav-link" href="#member-orders">→ Member Orders</a>
+      <a class="nav-link" href="#appointments">→ Appointments</a>
+      <a class="nav-link" href="#appointment-availability">→ Appointment Availability</a>
+      <a class="nav-link" href="#care-team-forms">→ Care Team Forms</a>
+      <a class="nav-link" href="#diagnosis">→ Diagnosis</a>
+      <a class="nav-link" href="#program-outcomes">→ Program Outcomes</a>
+      <a class="nav-link" href="#billing">→ Billing</a>
+      <a class="nav-link" href="#spectra">→ Spectra</a>
+      <a class="nav-link" href="#claims">→ Claims</a>
+    </div>
+  </div>
+
+  <!-- ============== GROUP 1 ============== -->
+  <section class="group">
+    <div class="group-header">
+      <span class="group-num">01</span>
+      <h2>Reach &amp; Pipeline</h2>
+      <span class="group-tag">Who Pelago could serve, and who we're selling to</span>
+    </div>
+
+    <article class="domain" id="sales-pipeline">
+      <div class="domain-head">
+        <h3>Sales Pipeline</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">Prospective clients we're selling to, before they sign.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One sales opportunity (a single deal Pelago is pursuing).
+              <span class="step-eg">"Acme Corp — annual contract negotiation, currently in proposal stage, opened 42 days ago."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack opportunities together to see the whole sales funnel: how many deals are at each stage, how long they linger, and how that's trending.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>The parent <strong>Account</strong> the opportunity is being pursued under (account_id, client_key)</li>
+              <li>The opportunity itself (opportunity_id, distinct count of opportunities)</li>
+            </ul>
+            <div class="step-note">That's the entire join. Lead source, full client profile, campaigns, and outreach history aren't pulled into this domain.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>How long does it take us to close a deal?</li>
+        <li>Where do opportunities tend to get stuck?</li>
+        <li>Which lead sources actually turn into closed business?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Sales</strong></span>
+    </article>
+
+    <article class="domain" id="eligibility">
+      <div class="domain-head">
+        <h3>Eligibility</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">Everyone who's covered by a Pelago client and could become a member.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One eligible person.
+              <span class="step-eg">"Jane, an Acme Corp employee, eligible for Pelago's Alcohol and Tobacco programs since March 2024."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack eligible people together to see whole covered populations: a single client's book, all eligible lives across Pelago, or eligibility broken out by program, geography, or demographics.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li><strong>Client profile</strong>: name, sub-client, region, industry, account, programs offered, region-lock flag</li>
+              <li>From <em>Member Journey</em>: just <code>member_id</code> (so you can see which eligible people became members)</li>
+              <li>From journey status: just two markers — <code>onboarded_count</code> and <code>care_initiated_count</code>, for funnel math</li>
+            </ul>
+            <div class="step-note">All the rich eligibility detail (subscriber id, group id, cost centers, health plan info, file metadata) lives directly inside this domain. The joins above are just for cross-referencing.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>How many eligible lives do we have this month, by client or program?</li>
+        <li>How long has the average eligible life been covered?</li>
+        <li>What share of eligible lives qualify for more than one program?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Implementation team</strong></span>
+    </article>
+
+    <article class="domain" id="growth">
+      <div class="domain-head">
+        <h3>Growth</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">Marketing outreach and the path from "never heard of Pelago" to registered member.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One marketing touch (an email send, an open, a click, a landing-page visit).
+              <span class="step-eg">"Jane received the 'Curious about your drinking?' email on April 2, opened it, then clicked through to the landing page."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack touches together to see a full campaign's performance, an individual's pre-registration journey, or how channels compare against each other.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>The campaign itself (id, name, year, group, status, type, substance, incentive)</li>
+              <li>Campaign experiment metadata (created_date)</li>
+              <li>The full <em>Eligibility</em> profile of the recipient (subscriber, group, programs, file metadata)</li>
+              <li>From <em>Member Journey</em>: basics only — <code>member_id</code>, program, primary_program, is_minor</li>
+              <li>Client profile (name, region, industry, programs offered)</li>
+            </ul>
+            <div class="step-note">No journey status is joined. You can see <em>if</em> a marketing recipient is a member, but not where they are in the journey, from this domain alone.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>How is each campaign performing on opens, clicks, and registrations?</li>
+        <li>Which audiences (program, client, geography) are most likely to engage?</li>
+        <li>Do members who engaged with marketing go on to better outcomes?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Growth and acquisition teams</strong></span>
+    </article>
+  </section>
+
+  <!-- ============== GROUP 2 ============== -->
+  <section class="group">
+    <div class="group-header">
+      <span class="group-num">02</span>
+      <h2>Members &amp; Journey</h2>
+      <span class="group-tag">Who became a member, and what they're doing</span>
+    </div>
+
+    <article class="domain" id="member-journey">
+      <div class="domain-head">
+        <h3>Member Journey</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">The "who is this member" foundation. Identity, status, motivations, stage of change.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One registered Pelago member.
+              <span class="step-eg">"Jane, registered May 5, in the Alcohol program, currently in the 'Action' stage of change, motivated by sleeping better."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack members together to see counts and breakdowns by program, client, status, motivation, or stage of change. This is also the foundation other domains lean on for member-level slicing.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>Eligibility brand and relationship</li>
+              <li>Client profile, plus Youturn reporting (employees / family enrolled)</li>
+              <li>The <strong>full</strong> journey status: registered, onboarded, enrolled, care-initiated, plus their dates and conversion rates</li>
+              <li>Stage of change (initial &amp; recent), treatment phase, milestone level 1, Zanzibar phase tiers</li>
+              <li>Content steps completed, active messaging streaks, pelatokens earned, HDHP consent</li>
+              <li>Care team interaction counts and averages</li>
+              <li>Primary assigned care team member (full_name, provider_type)</li>
+              <li>Incentives: qualified flag and send status</li>
+              <li>Personalization quiz results</li>
+            </ul>
+            <div class="step-note">This is the only domain that pulls journey status in full. Everywhere else you'll see just a slice of these fields.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">Use this when you need</div>
+      <ul class="questions">
+        <li>Counts of members by program, client, or status</li>
+        <li>Member-level context (motivation, stage, NPS) to combine with another domain</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Cross-functional</strong></span>
+    </article>
+
+    <article class="domain" id="engagement">
+      <div class="domain-head">
+        <h3>Engagement</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">What members do inside the Pelago app and website.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One in-product action (a tap, a feature opened, a page viewed).
+              <span class="step-eg">"Jane opened the 'Cravings' lesson at 8:42pm on April 12 from the iOS app."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack actions together to see a session, a member's daily or weekly engagement pattern, or feature-level usage across the entire population.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>From <em>Member Journey</em>: basics only — id, name, program, primary_program, age tier, gender, eligibility status, is_minor</li>
+              <li>Just <strong>two journey markers</strong>: <code>registered_date</code> and <code>care_initiated_date</code>. Nothing else from journey status.</li>
+              <li>Care team interaction counts (totals and per-member averages)</li>
+              <li>Just a count from <em>Member Check-Ins</em> (<code>check_in_count</code>) and a count from <em>Appointments</em> (<code>appointments_attended_count</code>)</li>
+              <li>Outcome highlights: tobacco 4-week quit rate, alcohol clinically-meaningful-change metrics</li>
+              <li>Primary assigned care team member</li>
+              <li>Client profile</li>
+            </ul>
+            <div class="step-note">Engagement is intentionally a thin tracker of activity, not a full member portrait. For deeper journey or outcomes context, jump to those domains.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>How many engagement events happened this week, and which features were most used?</li>
+        <li>Which member segments engage the most?</li>
+        <li>Do more-engaged members get better outcomes?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Product teams</strong></span>
+    </article>
+
+    <article class="domain" id="member-check-ins">
+      <div class="domain-head">
+        <h3>Member Check-Ins</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">What members report about their own progress, week to week.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One self-reported check-in for one program.
+              <span class="step-eg">"Jane's alcohol check-in on April 14: 2 drinks yesterday, mood 'okay,' no urges this morning."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack check-ins together to see a member's streak, trends over weeks, or program-wide check-in patterns and drop-off.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>From <em>Member Journey</em>: basics only — id, program, primary_program, age tier, gender, eligibility status, is_minor</li>
+              <li>Substance-specific check-in fields: drinks (alcohol), cannabis units, opioid abstinence test, tobacco quantity per day</li>
+            </ul>
+            <div class="step-note">Notably <strong>no client profile</strong> and <strong>no journey status</strong> are joined here. To slice check-ins by client or by where someone is in their journey, you'd combine with <em>Member Journey</em>.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>How often do members check in during their first month vs. later?</li>
+        <li>What share of check-ins show a decrease in drinks?</li>
+        <li>How long does it take to show first improvement?</li>
+        <li>When in the journey do check-ins start dropping off?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Clinical, Outcomes, Product</strong></span>
+    </article>
+
+    <article class="domain" id="member-orders">
+      <div class="domain-head">
+        <h3>Member Orders</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">The physical stuff Pelago sends to members. NRT, prescriptions, devices.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One ordered item (a single prescription, patch, or device).
+              <span class="step-eg">"A nicotine patch refill shipped to Jane on June 3, delivered June 6."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack items together to see a full order (often multiple items shipped together), a member's order history, and fulfillment metrics across the book.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>From <em>Member Journey</em>: basics only — id, name, program, primary_program, age tier, gender, eligibility status, is_minor</li>
+              <li>Order detail: item, channel, dates (order_date, status_date), order status, type, origin, price, quantity, fulfillment cost, ShipBob id</li>
+              <li>Client profile (name, region, industry, programs offered)</li>
+            </ul>
+            <div class="step-note">No journey status is joined. The "vendor" is captured by <code>channel</code> and <code>order_origin</code> on the order itself, not as a separate join.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>How many orders went out this month, by program or vendor?</li>
+        <li>What's the average time from order to fulfillment?</li>
+        <li>Which members have orders that are stuck or delayed?</li>
+        <li>What share of orders are repeats or replacements?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Clinical team</strong></span>
+    </article>
+  </section>
+
+  <!-- ============== GROUP 3 ============== -->
+  <section class="group">
+    <div class="group-header">
+      <span class="group-num">03</span>
+      <h2>Care Delivery</h2>
+      <span class="group-tag">The clinical work</span>
+    </div>
+
+    <article class="domain" id="appointments">
+      <div class="domain-head">
+        <h3>Appointments</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">Visits between members and the care team.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One appointment.
+              <span class="step-eg">"Jane's 30-minute video session with Dr. Smith, scheduled for June 10 at 4pm, completed."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack appointments together to see a member's visit history (1st, 2nd, 3rd appointment), provider caseloads, attendance trends, and time-to-care metrics.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>From <em>Member Journey</em>: basics only — id, program, primary_program, age tier, gender, eligibility status, care_pathway</li>
+              <li>Just <strong>four journey markers</strong>: <code>is_care_initiated</code>, <code>is_onboarded</code>, <code>registered_date</code>, <code>onboarded_date</code></li>
+              <li>Just <strong>one field from <em>Diagnosis</em></strong>: <code>diagnosis_severity_for_program</code></li>
+              <li>Eligibility brand and relationship</li>
+              <li>Member-level appointment summary (joined alongside the appointment): first/second/fourth attended-appt rates, conversion rates, days between visits, current-year totals, averages</li>
+              <li>Primary assigned care team member <em>(this is the member's primary provider, not the provider on the specific appt)</em></li>
+              <li>Client profile</li>
+            </ul>
+            <div class="step-note">The careful split here: Appointments doesn't pull the full Member Journey or full Diagnosis. It pulls just the few fields the appointment context needs.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>How many appointments are scheduled, and how is that changing over time?</li>
+        <li>How long does it take a new member to get to their first visit?</li>
+        <li>How does attendance vary across programs?</li>
+        <li>Are members more likely to no-show their second or third appointment?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Clinical Ops, Care Teams, Analytics</strong></span>
+    </article>
+
+    <article class="domain" id="appointment-availability">
+      <div class="domain-head">
+        <h3>Appointment Availability</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">When members <em>could</em> get seen. Provider supply, before any booking happens.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One open slot on a provider's schedule.
+              <span class="step-eg">"Dr. Smith has an opening Tuesday at 2pm, available to members in California."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack open slots together to see a provider's full schedule, total system capacity, or access metrics by state or program.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>Just provider name and the schedule slot itself (schedule_key, schedule_count)</li>
+            </ul>
+            <div class="step-note">Very lean. No member, no client, no program. Pure provider supply.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>How much availability do we have, by state and program?</li>
+        <li>How long would a new member typically wait for an opening?</li>
+        <li>Do we have enough capacity in a given region?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Clinical Ops, Provider Operations</strong></span>
+    </article>
+
+    <article class="domain" id="care-team-forms">
+      <div class="domain-head">
+        <h3>Care Team Forms</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">The structured notes providers fill out about members.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One answer to one question on one completed form.
+              <span class="step-eg">On Dr. Smith's intake form for Jane (June 10), one of the entries is "AUDIT score = 14."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack answers together to see a fully completed form, then a member's clinical record over time, then completion rates by provider or program.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>The form itself (form key, completion count)</li>
+              <li>The provider who filled it out, by id only (no name or type carried in)</li>
+              <li>Member basics from <em>Member Journey</em> (id, name, program, age, gender, state)</li>
+              <li>Client profile (client name, sub-client, region)</li>
+            </ul>
+            <div class="step-note">No journey status pulled in. If you need to know whether the member was onboarded or in care when the form was filled out, you'd combine this with Member Journey separately.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>What share of forms are getting completed?</li>
+        <li>What are providers actually capturing in specific fields?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Clinical Ops, Research, Data Science</strong></span>
+    </article>
+
+    <article class="domain" id="diagnosis">
+      <div class="domain-head">
+        <h3>Diagnosis</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">Clinical diagnoses over time. Kept separate so it doesn't crowd everyday reporting.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One diagnosis event for one member.
+              <span class="step-eg">"Jane was diagnosed with Alcohol Use Disorder, moderate severity, on May 4."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack diagnoses together to see a member's full clinical history (severity moving over time) and patterns across the population.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>Member basics from <em>Member Journey</em> (id, name, program, age, gender, state)</li>
+              <li>Client profile (client name, sub-client, region)</li>
+              <li>The full set of AUD/OUD diagnostic criteria fields lives inside the diagnosis record itself</li>
+            </ul>
+            <div class="step-note">Notably <strong>not</strong> joined to <em>Appointments</em> or <em>Care Team Forms</em>. The diagnosis stands on its own. If you need to know which appointment or form a diagnosis came from, that's a separate analysis.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>How does a member's diagnosis evolve over time?</li>
+        <li>What patterns show up across diagnosis types and severities?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Clinical Ops, Research, Advanced Analytics</strong></span>
+    </article>
+
+    <article class="domain" id="program-outcomes">
+      <div class="domain-head">
+        <h3>Program Outcomes</h3>
+        <span class="pill pill-active">Active</span>
+      </div>
+      <p class="domain-tagline">Did the program work? Per-member results for each substance program.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One member's outcome in one program.
+              <span class="step-eg">"Jane's Alcohol outcome: 14 drinks/week at registration → 4 drinks/week at 90 days. Marked as 'reduced-risk drinking.'"</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack member outcomes together to see program-level success rates, outcomes broken out by client, and how member segments compare.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>Member basics from <em>Member Journey</em> (id, name, program, age, gender, state)</li>
+              <li>Six journey markers: registered, onboarded, and care-initiated (counts and dates)</li>
+              <li>One field from <em>Diagnosis</em>: severity for the member's program</li>
+              <li>Per-substance summaries (alcohol, tobacco, opioid, cannabis), check-in improvement summary, BAM scores</li>
+              <li>Order details (e.g. prescription counts) and family support context</li>
+              <li>The member's primary care team member</li>
+              <li>Client profile (client name, sub-client, region)</li>
+            </ul>
+            <div class="step-note">This is the most heavily joined domain. It's the synthesis layer — it pulls a curated slice from almost every other domain so you can ask "did the program work?" in one place.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>What share of members hit a clinically meaningful reduction?</li>
+        <li>Which member characteristics line up with success?</li>
+        <li>Across the population, who improves, plateaus, or worsens?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Outcomes, Clinical, Client Success</strong></span>
+    </article>
+  </section>
+
+  <!-- ============== GROUP 4 ============== -->
+  <section class="group">
+    <div class="group-header">
+      <span class="group-num">04</span>
+      <h2>Revenue &amp; Claims</h2>
+      <span class="group-tag">The money side</span>
+    </div>
+
+    <article class="domain" id="billing">
+      <div class="domain-head">
+        <h3>Billing</h3>
+        <span class="pill pill-tbd">In design</span>
+      </div>
+      <p class="domain-tagline">What clients owe Pelago. Potential, projected, and actual invoiced revenue.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">A piece of client revenue (e.g. one invoice line, or one billing-model output for a client and month).
+              <span class="step-eg">"Acme Corp owed $42,000 for March, based on engagement-driven billing."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack pieces together to see a client's full monthly bill, total revenue across the book, or projected vs. actual revenue.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>Nothing externally. Client name, contract terms, and the billing model output are all denormalized into the invoice record itself.</li>
+            </ul>
+            <div class="step-note">Self-contained on purpose. Invoices need to be auditable on their own, so the fields you'd usually join in (client, billing model, contract) are stamped onto each row. Fast to query, no fan-out risk.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>What did this client get invoiced for last month?</li>
+        <li>How does projected revenue compare to potential revenue across the book?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Finance, RevOps, Client Success</strong></span>
+      <div class="tbd-note"><strong>Status:</strong> Still being designed. For current numbers, ask Finance directly.</div>
+    </article>
+
+    <article class="domain" id="spectra">
+      <div class="domain-head">
+        <h3>Spectra</h3>
+        <span class="pill pill-tbd">In design</span>
+      </div>
+      <p class="domain-tagline">A monthly client-level scoreboard. Eligibility, marketing, journey, and revenue rolled up together.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One client for one month, with totals already pulled together for you.
+              <span class="step-eg">"Acme Corp, June 2025: 8,400 eligible lives, 240 active members, 1,200 marketing sends, $42K invoiced."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack months together to see a client's trend over time, or stack clients together to see the entire book of business at a glance.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li><em>Eligibility</em> (eligible lives counts)</li>
+              <li>Marketing events and web events (sends, opens, site activity)</li>
+              <li>Account opportunities and client billing details (deal terms, contract specifics)</li>
+              <li>Combined billing model and incentives (revenue and earn-back logic)</li>
+              <li>A date dimension (so months line up cleanly)</li>
+              <li>Client profile (client name, sub-client, region)</li>
+            </ul>
+            <div class="step-note">Notably <strong>not</strong> joined to <em>Member Journey</em> directly. Spectra is built around clients and months, not members. Member-level activity comes in pre-aggregated through eligibility and engagement metrics, not row-by-row.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">Use this when you need</div>
+      <ul class="questions">
+        <li>A single side-by-side view of how a client is performing month over month</li>
+        <li>Cross-domain numbers without stitching them together yourself</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Finance, RevOps, Leadership</strong></span>
+      <div class="tbd-note"><strong>Status:</strong> Shape still being scoped. Spectra is intentionally separate from Billing.</div>
+    </article>
+
+    <article class="domain" id="claims">
+      <div class="domain-head">
+        <h3>Claims</h3>
+        <span class="pill pill-tbd">In design</span>
+      </div>
+      <p class="domain-tagline">Medical and pharmacy claims data from clients. Powers Pelago's ROI and savings story.</p>
+      <div class="steps">
+        <div class="step step-1">
+          <div class="step-bullet">1</div>
+          <div class="step-body">
+            <div class="step-label">The building block</div>
+            <div class="step-text">One medical or pharmacy claim line (one billed service, prescription, or procedure).
+              <span class="step-eg">"An ER visit for Jane, billed at $1,800, with a primary diagnosis of acute intoxication, dated February 18."</span>
+            </div>
+          </div>
+        </div>
+        <div class="step step-2">
+          <div class="step-bullet">2</div>
+          <div class="step-body">
+            <div class="step-label">How it adds up</div>
+            <div class="step-text">Stack claim lines together to see a member's full medical history, a client population's healthcare spend, or the savings impact Pelago is delivering vs. matched controls.</div>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="step-bullet">3</div>
+          <div class="step-body">
+            <div class="step-label">What it connects to</div>
+            <ul class="step-list">
+              <li>Just member id from <em>Member Journey</em>, plus one journey marker (registered date) so you can split pre- vs. post-Pelago claims</li>
+              <li>From <em>Eligibility</em>: the eligibility reference and a region-lock flag</li>
+              <li>Client name, sub-client, and region</li>
+            </ul>
+            <div class="step-note">Diagnoses, procedures, costs, and pharmacy details all live inside the claim record itself, not as joins. Claims is intentionally lean on joins so the file stays auditable against what the client sent.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ask-label">You can answer things like</div>
+      <ul class="questions">
+        <li>What is the ROI of Pelago's programs based on claims data?</li>
+      </ul>
+      <span class="usedby">Used most by: <strong>Outcomes, Actuarial, Client Success</strong></span>
+      <div class="tbd-note"><strong>Status:</strong> In design. ROI questions still flow through the Outcomes / Actuarial team.</div>
+    </article>
+
+  </section>
+
+</div>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <h3>Not sure which domain you need?</h3>
+  <p>Find the building block that sounds most like the question you're trying to answer. If nothing fits, drop it in #data-help and someone will point you to the right place.</p>
+  <p style="margin-top:18px;">Sources: <a href="https://www.figma.com/board/f2kbW4dRRkFDwLwxQzTyzT/Semantic-Layer-Discussions?node-id=50-503">Semantic Layer Discussions FigJam — Domains</a> · <a href="https://www.notion.so/pelagohealth/Domain-Directory-2e042c7bd8b48080924add7f7032625d">Notion Domain Directory</a></p>
+</footer>
+
+</body>
+</html>

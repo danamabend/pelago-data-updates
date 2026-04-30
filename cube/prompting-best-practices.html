@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompting Best Practices for Cube</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pelago-yellow: #FAE355;
+    --jet-black: #212633;
+    --white: #FFFFFF;
+    --maroon: #722F49;
+    --moss-green: #4D6525;
+    --cerulean: #A4BDFF;
+    --punch-pink: #EEBCFF;
+    --tea-green: #DDF1C4;
+    --mist-blue: #E8EEFF;
+    --tan: #BDA98C;
+    --peach: #FCD3BF;
+    --cream: #FFF4DC;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Suisse Neue', 'DM Sans', sans-serif;
+    color: var(--jet-black);
+    background-color: var(--cream);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  /* Hero header with archipelago motif */
+  .hero {
+    background: var(--jet-black);
+    color: var(--white);
+    padding: 80px 60px;
+    border-radius: 200px 40px 200px 40px;
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 200px;
+    height: 120px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+    opacity: 0.9;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 60px;
+    width: 140px;
+    height: 80px;
+    background: var(--maroon);
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Rebond Grotesque', 'Roboto Slab', serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--pelago-yellow);
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero h1 {
+    font-family: 'Rebond Grotesque', 'Roboto Slab', serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 620px;
+    color: var(--white);
+    opacity: 0.92;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Section styling */
+  h2 {
+    font-family: 'Rebond Grotesque', 'Roboto Slab', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--jet-black);
+    margin-top: 56px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 28px;
+    background: var(--pelago-yellow);
+    border-radius: 4px;
+  }
+
+  h3 {
+    font-family: 'Rebond Grotesque', 'Roboto Slab', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--maroon);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  h4 {
+    font-family: 'Rebond Grotesque', 'Roboto Slab', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--jet-black);
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin-bottom: 14px;
+  }
+
+  /* Callout: core principle */
+  .callout {
+    background: var(--mist-blue);
+    border-left: 6px solid var(--cerulean);
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 20px 0;
+  }
+
+  .callout-strong {
+    background: var(--tea-green);
+    border-left: 6px solid var(--moss-green);
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 20px 0;
+  }
+
+  .callout-warm {
+    background: var(--peach);
+    border-left: 6px solid var(--maroon);
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 20px 0;
+  }
+
+  .callout-yellow {
+    background: var(--pelago-yellow);
+    padding: 24px 28px;
+    border-radius: 16px;
+    margin: 24px 0;
+  }
+
+  .callout-yellow .label {
+    font-family: 'Rebond Grotesque', 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--jet-black);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  /* Pattern box */
+  .pattern {
+    background: var(--white);
+    border: 2px dashed var(--tan);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    font-family: 'Roboto Slab', monospace;
+    font-size: 15px;
+    color: var(--jet-black);
+  }
+
+  /* Example boxes */
+  .example {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  .example-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 18px 22px;
+    border: 1px solid rgba(33, 38, 51, 0.08);
+  }
+
+  .example-card .tag {
+    display: inline-block;
+    font-family: 'Rebond Grotesque', 'Roboto Slab', serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  .tag-bad {
+    background: var(--peach);
+    color: var(--maroon);
+  }
+
+  .tag-good {
+    background: var(--tea-green);
+    color: var(--moss-green);
+  }
+
+  .tag-weak {
+    background: var(--peach);
+    color: var(--maroon);
+  }
+
+  .tag-strong {
+    background: var(--tea-green);
+    color: var(--moss-green);
+  }
+
+  .example-card code {
+    font-family: 'Roboto Slab', monospace;
+    font-size: 14.5px;
+    color: var(--jet-black);
+    line-height: 1.5;
+    display: block;
+  }
+
+  /* Comparison rows */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+
+  @media (min-width: 720px) {
+    .compare {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Lists */
+  ul, ol {
+    margin: 12px 0 16px 24px;
+  }
+
+  li {
+    margin-bottom: 8px;
+    line-height: 1.55;
+  }
+
+  /* Inline code */
+  code.inline {
+    font-family: 'Roboto Slab', monospace;
+    background: var(--mist-blue);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--jet-black);
+  }
+
+  /* Checklist */
+  .checklist {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 24px 0;
+    border: 2px solid var(--pelago-yellow);
+  }
+
+  .checklist ul {
+    list-style: none;
+    margin-left: 0;
+  }
+
+  .checklist li {
+    padding-left: 32px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--moss-green);
+    border-radius: 4px;
+    background: var(--tea-green);
+  }
+
+  /* Link */
+  a {
+    color: var(--maroon);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  a:hover {
+    color: var(--jet-black);
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 2px solid var(--tan);
+    text-align: center;
+    color: var(--tan);
+    font-size: 14px;
+  }
+
+  .footer-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Rebond Grotesque', 'Roboto Slab', serif;
+    font-weight: 700;
+    color: var(--jet-black);
+    font-size: 16px;
+  }
+
+  .footer-mark::before {
+    content: "";
+    width: 24px;
+    height: 14px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Section intro */
+  .section-intro {
+    font-size: 17px;
+    color: var(--jet-black);
+    opacity: 0.85;
+    margin-bottom: 16px;
+  }
+
+  /* Numbered section heading marker */
+  .section-num {
+    display: inline-block;
+    background: var(--pelago-yellow);
+    color: var(--jet-black);
+    font-family: 'Rebond Grotesque', 'Roboto Slab', serif;
+    font-weight: 700;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 36px;
+    margin-right: 12px;
+    font-size: 16px;
+    vertical-align: middle;
+  }
+
+  /* Top bar */
+  .topbar {
+    background: var(--jet-black);
+    color: var(--white);
+    padding: 14px 32px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Rebond Grotesque', 'Roboto Slab', serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 14px;
+  }
+  .topbar-brand::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 14px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+  }
+  .topbar a {
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .topbar a:hover { color: var(--pelago-yellow); }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-brand">Pelago · Cube Knowledge Center</div>
+  <nav style="display:flex; gap:20px; flex-wrap:wrap;">
+    <a href="index.html">Home</a>
+    <a href="domain-directory.html">Domains</a>
+    <a href="guardrails.html">Guardrails</a>
+  </nav>
+</div>
+<div class="container">
+
+  <header class="hero">
+    <div class="hero-eyebrow">Pelago • Data &amp; Analytics</div>
+    <h1>Prompting Best Practices for Cube</h1>
+    <p class="hero-sub">How to effectively prompt Cube using natural language to get accurate, reliable data outputs. Focused on two critical skills: prompting with specificity, and redirecting prompts when results are incorrect.</p>
+  </header>
+
+  <p class="section-intro">This document outlines how to effectively prompt Cube using natural language to get accurate, reliable data outputs. It focuses on two critical skills:</p>
+  <ol>
+    <li>Prompting with specificity</li>
+    <li>Redirecting prompts when results are incorrect</li>
+  </ol>
+
+  <h2 id="section-1"><span class="section-num">1</span>Prompting with Specificity</h2>
+  <p class="section-intro">How to structure prompts for accurate queries. This section is not about <em>what</em> to ask, but <em>how</em> to phrase it so Cube correctly translates your intent into the right query.</p>
+
+  <h3>Core Principle</h3>
+  <div class="callout">
+    <p>Cube maps natural language to a data schema. The more your prompt aligns with that schema, the higher the probability of correct results.</p>
+    <p style="margin-top:10px;"><strong>Think of prompting as:</strong> describing a query in structured language, not asking a question conversationally.</p>
+  </div>
+
+  <h3>The Prompt Structure Pattern</h3>
+  <p>Use this repeatable structure whenever possible:</p>
+  <div class="pattern">
+    Show <strong>[metric]</strong> by <strong>[dimension]</strong> over <strong>[time range]</strong>, filtered to <strong>[conditions]</strong>, where <strong>[definitions]</strong>
+  </div>
+  <p>This forces clarity across the key components of a query.</p>
+
+  <h4>Example</h4>
+  <div class="example">
+    <div class="example-card">
+      <span class="tag tag-good">Option 1</span>
+      <code>Show total revenue by month over the last 12 months, filtered to completed orders, where revenue is defined as sum of order_amount</code>
+    </div>
+    <div class="example-card">
+      <span class="tag tag-good">Option 2</span>
+      <code>Show total_revenue by date_of_service month over the last 12 months, filtered to order_status = 'completed'</code>
+    </div>
+  </div>
+
+  <h3>Use Schema-Aligned Language</h3>
+
+  <h4>1. Reference Fields Explicitly</h4>
+  <p>Whenever possible, use actual field names and signal that they are fields.</p>
+  <div class="compare">
+    <div class="example-card"><span class="tag tag-weak">Instead of</span><code>revenue</code></div>
+    <div class="example-card"><span class="tag tag-strong">Prefer</span><code>total revenue (sum of order_amount field)</code></div>
+    <div class="example-card"><span class="tag tag-weak">Instead of</span><code>registration date</code></div>
+    <div class="example-card"><span class="tag tag-strong">Prefer</span><code>registered_date field</code></div>
+  </div>
+  <p>This reduces ambiguity and prevents the model from guessing.</p>
+
+  <h4>2. Be Explicit About Values (Filters)</h4>
+  <p>When filtering, clearly indicate values and where they apply.</p>
+  <div class="compare">
+    <div class="example-card"><span class="tag tag-weak">Weak</span><code>only completed orders</code></div>
+    <div class="example-card"><span class="tag tag-strong">Strong</span><code>where order_status = "completed" (value of order_status field)</code></div>
+    <div class="example-card"><span class="tag tag-weak">Weak</span><code>US users</code></div>
+    <div class="example-card"><span class="tag tag-strong">Strong</span><code>where country = "US"</code></div>
+  </div>
+  <p>This helps the system distinguish between fields and values.</p>
+
+  <h4>3. Specify the Metric Calculation</h4>
+  <p>Do not assume the system knows how to compute a metric.</p>
+  <div class="compare">
+    <div class="example-card"><span class="tag tag-weak">Weak</span><code>revenue</code></div>
+    <div class="example-card"><span class="tag tag-strong">Strong</span><code>total revenue defined as sum of order_amount</code></div>
+    <div class="example-card"><span class="tag tag-weak">Weak</span><code>active users</code></div>
+    <div class="example-card"><span class="tag tag-strong">Strong</span><code>active users defined as count of distinct user_id with at least one login event</code></div>
+  </div>
+
+  <h4>4. Define the Time Field and Granularity</h4>
+  <p>Time is one of the most common sources of errors.</p>
+  <ul>
+    <li><strong>Specify the field:</strong> use <code class="inline">order_date</code> as the time field</li>
+    <li><strong>Specify the granularity:</strong> grouped by month</li>
+    <li><strong>Specify the range:</strong> over the last 12 months</li>
+  </ul>
+
+  <h4>5. Clarify Dimensions Precisely</h4>
+  <p>Avoid vague groupings.</p>
+  <div class="compare">
+    <div class="example-card"><span class="tag tag-weak">Weak</span><code>by location</code></div>
+    <div class="example-card"><span class="tag tag-strong">Strong</span><code>by geographic state (ex value: Missouri)</code></div>
+    <div class="example-card"><span class="tag tag-weak">Weak</span><code>by customer type</code></div>
+    <div class="example-card"><span class="tag tag-strong">Strong</span><code>by customer_type field</code></div>
+  </div>
+
+  <h3>Further Breakdown</h3>
+  <div class="callout-strong">
+    <p><strong>A strong prompt:</strong></p>
+    <ul>
+      <li>Maps <strong>metric</strong> → measure</li>
+      <li>Maps <strong>dimension</strong> → column</li>
+      <li>Maps <strong>filter</strong> → field + value</li>
+      <li>Maps <strong>time</strong> → field + range + granularity</li>
+    </ul>
+    <p style="margin-top:10px;">If any of these are ambiguous, the query is likely to be wrong.</p>
+  </div>
+  <div class="callout-warm">
+    <p><strong>Note:</strong> It is helpful to familiarize yourself with the difference between different query descriptors (schema elements) such as a filter vs a value vs a field.</p>
+  </div>
+
+  <h3>When You Don't Know the Field or Value Name</h3>
+  <p>It's common not to know the exact schema. In those cases, guide the model by describing the role of the field and giving example values.</p>
+
+  <h4>How to Describe an Unknown Field</h4>
+  <ul>
+    <li><strong>State intent explicitly:</strong> I'm looking for a field that represents order status</li>
+    <li><strong>Describe what it does:</strong> a field that indicates whether an order is completed, pending, or canceled</li>
+    <li><strong>Provide example values:</strong> values like "completed", "pending", "canceled"</li>
+    <li><strong>Ask it to use the closest matching field:</strong> use the closest matching field in the schema</li>
+  </ul>
+
+  <h4>How to Describe an Unknown Value</h4>
+  <ul>
+    <li><strong>Anchor to the field concept:</strong> filter to the value that represents completed orders</li>
+    <li><strong>Provide examples or synonyms:</strong> values like "complete", "completed", or similar</li>
+  </ul>
+
+  <h4>Combine into a Structured Prompt</h4>
+  <div class="example-card">
+    <code>Show total revenue by month over the last 12 months, using the field that represents order status (values like "completed", "pending", "canceled"), filtered to the value that represents completed orders</code>
+  </div>
+
+  <div class="callout-yellow">
+    <span class="label">Key Idea</span>
+    <p>When you don't know exact names, describe <strong>what the field represents</strong> (its meaning) and <strong>what the values look like</strong> (examples). This gives the model enough context to map your intent to the correct schema element.</p>
+  </div>
+
+  <h3>Bad vs Structured Prompt</h3>
+  <div class="example">
+    <div class="example-card">
+      <span class="tag tag-bad">Conversational (high risk)</span>
+      <code>How is revenue doing recently?</code>
+    </div>
+    <div class="example-card">
+      <span class="tag tag-good">Structured (high confidence)</span>
+      <code>Show total revenue (sum of order_amount) by week over the last 8 weeks, where order_status = "completed"</code>
+    </div>
+  </div>
+
+  <h2 id="section-2"><span class="section-num">2</span>Redirecting Prompts When Results Are Incorrect</h2>
+  <p class="section-intro">Even well-structured prompts may return incorrect results due to misinterpretation of terms or schema.</p>
+
+  <h3>Common Issues</h3>
+  <ul>
+    <li>Wrong metric selected</li>
+    <li>Incorrect time granularity</li>
+    <li>Missing or incorrect filters</li>
+    <li>Misinterpreted business logic (e.g., "active users")</li>
+    <li>Query join path relationship confusion (most complex issue)</li>
+  </ul>
+
+  <h3>How to Redirect Effectively</h3>
+
+  <h4>A. Clarify the Metric</h4>
+  <p>If the output uses the wrong measure:</p>
+  <div class="example-card">
+    <code>Use "total revenue" defined as sum of order_amount, not count of orders</code>
+  </div>
+
+  <h4>B. Add Missing Constraints</h4>
+  <p>If the scope is wrong:</p>
+  <div class="example-card">
+    <code>Limit results to completed orders only and exclude canceled transactions</code>
+  </div>
+
+  <h4>C. Correct Time Definitions</h4>
+  <p>If time aggregation is incorrect:</p>
+  <div class="example-card">
+    <code>Group results by month instead of day</code>
+  </div>
+
+  <h4>D. Define Business Logic Explicitly</h4>
+  <p>If terms are ambiguous:</p>
+  <div class="example-card">
+    <code>Define active users as users who logged in at least once in the past 30 days</code>
+  </div>
+
+  <h4>E. Iterative Refinement Example</h4>
+  <div class="example">
+    <div class="example-card">
+      <span class="tag tag-bad">Initial Prompt</span>
+      <code>Show revenue by month</code>
+    </div>
+    <div class="example-card">
+      <span class="tag tag-weak">Incorrect Output Issue</span>
+      <code>Includes refunds</code>
+    </div>
+    <div class="example-card">
+      <span class="tag tag-good">Refined Prompt</span>
+      <code>Show monthly total revenue excluding refunded transactions</code>
+    </div>
+  </div>
+
+  <h4>F. Join Path Refinement</h4>
+  <div class="example">
+    <div class="example-card">
+      <span class="tag tag-bad">Initial Prompt</span>
+      <code>Show revenue by client industry type</code>
+    </div>
+    <div class="example-card">
+      <span class="tag tag-good">Refined Prompt</span>
+      <code>Show revenue by client industry type. The model seems to be pulling incorrect results: to use the field industry_type you may need to join to the client_profile data set.</code>
+    </div>
+  </div>
+
+  <h2 id="section-3"><span class="section-num">3</span>Practical Prompting Checklist</h2>
+  <p class="section-intro">Before submitting a prompt, ask:</p>
+  <div class="checklist">
+    <ul>
+      <li>Did I clearly define the metric?</li>
+      <li>Did I specify time range and granularity?</li>
+      <li>Did I include all necessary filters?</li>
+      <li>Did I remove ambiguity in business terms?</li>
+      <li>Would someone else interpret this the same way?</li>
+    </ul>
+  </div>
+
+  <h2><span class="section-num">4</span>Example</h2>
+  <p>The following example lacks best practices, but it is meant to show that even adding a small amount of context around an unknown field places the right filter on the data.</p>
+  <p><a href="https://www.loom.com/share/968f820583124022b394481c0b399e11" target="_blank" rel="noopener">View the Loom walkthrough</a></p>
+
+  <h2 id="section-5"><span class="section-num">5</span>Optional Workflow: Use an LLM to Refine the Prompt First</h2>
+  <p>This should not be the default workflow for every prompt. Most of the time, the goal is to write one clear prompt and get the answer back.</p>
+  <p>However, if you are struggling to create a strong prompt, you can use an LLM to refine or optimize the prompt before running it in Cube. This can also be a useful practice technique. By asking an LLM to improve your prompt, you can learn how to phrase analytics questions with more structure, specificity, and schema alignment.</p>
+
+  <h3>Why This Works</h3>
+  <p>LLMs are often strong prompt engineers. They can help translate a rough question into a more structured prompt with clearer metrics, dimensions, filters, field names, values, and definitions.</p>
+  <p>As workflows move toward more agent orchestration, allowing one model to optimize the prompt before another model executes against data can improve consistency and reliability.</p>
+
+  <h3>When to Use This Workflow</h3>
+  <p>Use prompt refinement when:</p>
+  <ul>
+    <li>You are struggling to phrase the prompt clearly</li>
+    <li>The first result is wrong or ambiguous</li>
+    <li>The question involves multiple filters, metrics, or time windows</li>
+    <li>You want to practice writing more structured analytics prompts</li>
+    <li>The output needs to be especially reliable</li>
+  </ul>
+
+  <h2><span class="section-num">6</span>Summary</h2>
+  <div class="callout-yellow">
+    <span class="label">High-quality prompts are</span>
+    <ul style="margin-left: 20px; margin-top: 8px;">
+      <li><strong>Specific</strong></li>
+      <li><strong>Structured</strong></li>
+      <li><strong>Explicit</strong> about fields, values, definitions, logic, and constraints</li>
+    </ul>
+    <p style="margin-top: 14px;">When results are incorrect, treat prompting as an iterative process. Refine inputs by clarifying assumptions, adding constraints, and correcting definitions.</p>
+    <p style="margin-top: 10px;"><strong>The more closely your prompt maps to the underlying data schema, the more reliable your output.</strong></p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-mark">Pelago</div>
+    <p style="margin-top: 8px;">Virtual clinic for substance use management • pelagohealth.com</p>
+  </div>
+
+</div>
+</body>
+</html>

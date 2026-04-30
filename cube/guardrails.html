@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Semantic Layer Guardrails · Cube Knowledge Center · Pelago</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Roboto+Slab:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pelago-yellow: #FAE355;
+    --jet-black: #212633;
+    --white: #FFFFFF;
+    --maroon: #722F49;
+    --moss-green: #4D6525;
+    --cerulean: #A4BDFF;
+    --punch-pink: #EEBCFF;
+    --tea-green: #DDF1C4;
+    --mist-blue: #E8EEFF;
+    --tan: #BDA98C;
+    --peach: #FCD3BF;
+    --cream: #FFF4DC;
+    --ink-soft: #4a5060;
+    --hairline: rgba(33, 38, 51, 0.12);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    color: var(--jet-black);
+    background: var(--cream);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Roboto Slab', Georgia, serif;
+    color: var(--jet-black);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0 0 0.4em 0;
+  }
+
+  a { color: var(--maroon); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Top bar */
+  .topbar {
+    background: var(--jet-black);
+    color: var(--white);
+    padding: 14px 32px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 14px;
+  }
+  .topbar-brand::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 14px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+  }
+  .topbar a {
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .topbar a:hover { color: var(--pelago-yellow); }
+
+  /* Hero */
+  .hero {
+    background: var(--maroon);
+    color: var(--white);
+    padding: 88px 32px 110px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    width: 480px; height: 480px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+    right: -180px; top: -200px;
+    opacity: 0.18;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    width: 280px; height: 280px;
+    background: var(--jet-black);
+    border-radius: 50%;
+    left: -100px; bottom: -130px;
+    opacity: 0.55;
+  }
+  .hero-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 5vw, 54px);
+    color: var(--white);
+    margin-bottom: 18px;
+    max-width: 800px;
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--pelago-yellow);
+    margin-bottom: 16px;
+  }
+  .hero-lead {
+    font-size: 18px;
+    max-width: 680px;
+    color: rgba(255,255,255,0.88);
+  }
+  .breadcrumb {
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+  .breadcrumb a {
+    color: var(--pelago-yellow);
+    font-weight: 500;
+  }
+
+  /* Container */
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* TL;DR card */
+  .tldr {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 32px 36px;
+    margin-top: -64px;
+    box-shadow: 0 8px 32px rgba(33, 38, 51, 0.08);
+    position: relative;
+    z-index: 2;
+    border-top: 6px solid var(--pelago-yellow);
+  }
+  .tldr-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--maroon);
+    margin-bottom: 8px;
+  }
+  .tldr h2 {
+    font-size: 24px;
+    margin: 0 0 14px;
+  }
+  .tldr p {
+    font-size: 16.5px;
+    margin: 0 0 12px;
+    color: var(--jet-black);
+  }
+  .tldr p:last-child { margin-bottom: 0; }
+  .tldr strong { color: var(--maroon); }
+
+  /* Section */
+  section.block { margin-top: 64px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--jet-black);
+    flex-wrap: wrap;
+  }
+  .section-num {
+    font-family: 'Roboto Slab', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--maroon);
+  }
+  .section-head h2 {
+    font-size: 28px;
+    margin: 0;
+    flex: 1 1 auto;
+  }
+  .section-tag {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .section-lead {
+    font-size: 16.5px;
+    color: var(--jet-black);
+    margin: 0 0 24px;
+    max-width: 720px;
+  }
+
+  /* Principle pillars */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .pillar {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    padding: 22px 24px;
+  }
+  .pillar-tag {
+    display: inline-block;
+    background: var(--tea-green);
+    color: var(--moss-green);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .pillar h3 {
+    font-size: 17px;
+    margin: 0 0 6px;
+  }
+  .pillar p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  /* Cost cards */
+  .cost-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .cost-card {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-left: 6px solid var(--maroon);
+    border-radius: 14px;
+    padding: 20px 24px;
+  }
+  .cost-card h4 {
+    font-size: 16px;
+    margin: 0 0 6px;
+    color: var(--maroon);
+  }
+  .cost-card p {
+    margin: 0;
+    color: var(--jet-black);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  /* Decision aid */
+  .decide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .decide-col {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 30px;
+    border: 1px solid var(--hairline);
+  }
+  .decide-col.cube { border-top: 6px solid var(--moss-green); }
+  .decide-col.escalate { border-top: 6px solid var(--cerulean); }
+  .decide-col h3 {
+    font-size: 20px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .decide-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--white);
+  }
+  .icon-cube { background: var(--moss-green); }
+  .icon-esc { background: #4a6bd1; }
+  .decide-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .decide-col li {
+    padding: 10px 0 10px 26px;
+    position: relative;
+    font-size: 15px;
+    border-bottom: 1px solid var(--hairline);
+    line-height: 1.55;
+  }
+  .decide-col li:last-child { border-bottom: none; }
+  .decide-col.cube li::before {
+    content: "→";
+    position: absolute;
+    left: 0; top: 10px;
+    color: var(--moss-green);
+    font-weight: 700;
+  }
+  .decide-col.escalate li::before {
+    content: "↗";
+    position: absolute;
+    left: 0; top: 10px;
+    color: #4a6bd1;
+    font-weight: 700;
+  }
+  @media (max-width: 720px) {
+    .decide { grid-template-columns: 1fr; }
+  }
+
+  /* Anti-pattern list */
+  .anti-list {
+    background: var(--white);
+    border-radius: 20px;
+    border: 1px solid var(--hairline);
+    overflow: hidden;
+  }
+  .anti-row {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .anti-row:last-child { border-bottom: none; }
+  .anti-num {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--peach);
+    color: var(--maroon);
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .anti-row h4 {
+    font-size: 17px;
+    margin: 0 0 4px;
+  }
+  .anti-row p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .anti-why {
+    margin-top: 10px;
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: var(--jet-black);
+    font-style: italic;
+    border-left: 3px solid var(--maroon);
+  }
+  .anti-why strong { font-style: normal; color: var(--maroon); }
+
+  /* Case study quote */
+  .case {
+    background: var(--jet-black);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 34px 38px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 18px;
+  }
+  .case::before {
+    content: "";
+    position: absolute;
+    width: 200px; height: 200px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+    right: -80px; top: -80px;
+    opacity: 0.15;
+  }
+  .case-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--pelago-yellow);
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .case h3 {
+    color: var(--white);
+    font-size: 22px;
+    margin: 0 0 14px;
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+  .case p {
+    margin: 0 0 12px;
+    color: rgba(255,255,255,0.85);
+    font-size: 15.5px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+  .case p:last-child { margin-bottom: 0; }
+
+  /* Escalation steps */
+  .steps-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .step-item {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .step-circle {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--pelago-yellow);
+    color: var(--jet-black);
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-item h4 {
+    font-size: 16px;
+    margin: 0 0 4px;
+  }
+  .step-item p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  /* Exceptions */
+  .exceptions {
+    background: var(--mist-blue);
+    border-radius: 20px;
+    padding: 28px 32px;
+    border-left: 6px solid var(--cerulean);
+  }
+  .exceptions h3 {
+    font-size: 20px;
+    margin: 0 0 8px;
+  }
+  .exceptions p {
+    margin: 0 0 14px;
+    font-size: 15px;
+  }
+  .exceptions ul {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .exceptions li {
+    font-size: 14.5px;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .exceptions strong { color: var(--maroon); }
+
+  /* CTA panel */
+  .cta-panel {
+    background: var(--pelago-yellow);
+    border-radius: 24px;
+    padding: 40px 44px;
+    margin-top: 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-panel::after {
+    content: "";
+    position: absolute;
+    width: 260px; height: 260px;
+    background: var(--cream);
+    border-radius: 50%;
+    left: -110px; bottom: -130px;
+    opacity: 0.55;
+  }
+  .cta-panel h2 {
+    font-size: 28px;
+    margin: 0 0 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-panel p {
+    font-size: 16px;
+    margin: 0 0 22px;
+    color: var(--jet-black);
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: transform 0.1s ease, background 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--jet-black);
+    color: var(--pelago-yellow);
+  }
+  .btn-primary:hover {
+    background: var(--maroon);
+    color: var(--white);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    background: var(--white);
+    color: var(--jet-black);
+    border: 1px solid var(--hairline);
+  }
+  .btn-secondary:hover {
+    background: var(--cream);
+    text-decoration: none;
+  }
+
+  /* Footer */
+  footer.site-footer {
+    margin-top: 80px;
+    padding: 48px 32px 56px;
+    background: var(--jet-black);
+    color: var(--white);
+    text-align: center;
+  }
+  footer.site-footer p {
+    color: rgba(255,255,255,0.78);
+    font-size: 14px;
+    max-width: 640px;
+    margin: 0 auto 8px;
+  }
+  footer.site-footer a {
+    color: var(--pelago-yellow);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  footer.site-footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .container { padding: 0 20px; }
+    .hero { padding: 64px 20px 92px; }
+    .tldr { padding: 24px 24px; }
+    .anti-row { padding: 18px 22px; }
+    .cta-panel { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-brand">Pelago · Cube Knowledge Center</div>
+  <nav style="display:flex; gap:20px; flex-wrap:wrap;">
+    <a href="index.html">Home</a>
+    <a href="prompting-best-practices.html">Prompting</a>
+    <a href="domain-directory.html">Domains</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="index.html">Cube Knowledge Center</a> / Semantic Layer Guardrails</div>
+    <div class="eyebrow">Guardrails · Semantic Layer</div>
+    <h1>Use the semantic layer. Don't reinvent the joins.</h1>
+    <p class="hero-lead">Cube exists so that the way Pelago data joins together is defined once, reviewed, version-controlled, and visible. This page is about why we hold that line, and what to do when you hit something Cube can't answer.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <div class="tldr-eyebrow">The short version</div>
+    <h2>If the answer can come from Cube, it should.</h2>
+    <p>When you write custom queries against our marts in a BI tool, a notebook, or a spreadsheet, you are recreating join logic that already lives, tested and reviewed, inside Cube. Every time that happens we add a quiet maintenance debt that surfaces later as broken reports, conflicting numbers, and time spent QAing instead of analyzing.</p>
+    <p>Use Cube views for the join patterns. Bring your own filters, dimensions, and metrics on top. Escalate when something is genuinely missing. <strong>That's the contract.</strong></p>
+  </div>
+
+  <!-- 01 The principle -->
+  <section class="block" id="principle">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Why the semantic layer exists</h2>
+      <span class="section-tag">What you get when joins live in Cube</span>
+    </div>
+    <p class="section-lead">A semantic layer is a single, governed definition of how Pelago's data fits together. Members join to clients this way. Appointments join to journey markers that way. Once a join is defined in Cube, every report that uses it gets the same answer.</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-tag">Defined once</span>
+        <h3>One source of truth</h3>
+        <p>The relationship between a member and a client is encoded in Cube. Anyone querying it gets the same answer. No two analysts inventing two slightly different joins.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-tag">Code-controlled</span>
+        <h3>Reviewed and versioned</h3>
+        <p>Every change to a Cube view goes through a pull request. We can trace what changed, why, and when, and roll it back if needed.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-tag">Validated</span>
+        <h3>Tested before it ships</h3>
+        <p>Schema changes get caught in CI. If an upstream mart changes shape, we know before the dashboards break, not after a stakeholder asks why a number moved.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-tag">Visible</span>
+        <h3>Discoverable to everyone</h3>
+        <p>The domain directory shows what Cube can answer. New folks ramp on a documented surface area instead of inheriting someone's untraceable file.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 The cost -->
+  <section class="block" id="cost">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>The cost of going around it</h2>
+      <span class="section-tag">What happens when queries live outside the semantic layer</span>
+    </div>
+    <p class="section-lead">A custom query written directly against our marts looks fast. It feels like ownership. The cost shows up later, often after the original author has moved on.</p>
+
+    <div class="cost-grid">
+      <div class="cost-card">
+        <h4>No version control</h4>
+        <p>A query saved inside a Power BI file or a notebook can't be reviewed, traced, or rolled back. Nobody outside the file knows it exists.</p>
+      </div>
+      <div class="cost-card">
+        <h4>Brittle to upstream changes</h4>
+        <p>When a column gets renamed or a mart gets restructured, custom queries break silently. Often the report still runs, but the numbers are wrong.</p>
+      </div>
+      <div class="cost-card">
+        <h4>Inconsistent definitions</h4>
+        <p>The same metric ends up calculated three different ways across three different files. Leadership sees three different numbers and trust erodes.</p>
+      </div>
+      <div class="cost-card">
+        <h4>Hidden dependencies</h4>
+        <p>No one tracks which queries depend on which mart. The data team makes a routine change and a half-dozen unknown reports go red.</p>
+      </div>
+      <div class="cost-card">
+        <h4>Maintenance debt</h4>
+        <p>Whoever inherits the file owns the cleanup. Over-engineered joins that were "quick" a year ago become weeks of untangling now.</p>
+      </div>
+      <div class="cost-card">
+        <h4>QA tax</h4>
+        <p>More time spent verifying numbers than actually analyzing them. The exact thing the semantic layer was built to prevent.</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-eyebrow">A pattern we want to stop repeating</div>
+      <h3>One overbuilt query inside a BI file is a small problem. Twenty of them is the data team's whole roadmap.</h3>
+      <p>We've already seen what happens when join logic gets baked into a single Power BI file with no review and no source control. The query worked at first. The author moved on. The marts evolved. Now the report ships numbers that look reasonable and aren't, and nobody is sure which fields it was supposed to be joining in the first place.</p>
+      <p>That's the failure mode this page exists to prevent.</p>
+    </div>
+  </section>
+
+  <!-- 03 Decision aid -->
+  <section class="block" id="decide">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Use Cube, or escalate</h2>
+      <span class="section-tag">A simple decision aid</span>
+    </div>
+    <p class="section-lead">Most analytical questions at Pelago can be answered with Cube. The list below tells you which side you're on.</p>
+
+    <div class="decide">
+      <div class="decide-col cube">
+        <h3><span class="decide-icon icon-cube">✓</span>Use Cube when</h3>
+        <ul>
+          <li>You can express your question as a metric, a dimension, a filter, and a time range.</li>
+          <li>The data lives in a domain you can see in the directory.</li>
+          <li>You need a one-off chart, an answer, or a recurring report.</li>
+          <li>Someone else is likely to ask a similar question.</li>
+          <li>You want the numbers to match what other teams are reporting.</li>
+        </ul>
+      </div>
+      <div class="decide-col escalate">
+        <h3><span class="decide-icon icon-esc">↗</span>Escalate when</h3>
+        <ul>
+          <li>The field or metric you need doesn't exist in any domain.</li>
+          <li>You need to combine data across domains in a way no view supports.</li>
+          <li>You need to join external data the data team hasn't modeled yet.</li>
+          <li>You're doing exploratory data science that won't be promoted to a recurring report.</li>
+          <li>You think the right answer is a new Cube view.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Anti-patterns -->
+  <section class="block" id="anti-patterns">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Anti-patterns to avoid</h2>
+      <span class="section-tag">Specific habits that quietly cost us</span>
+    </div>
+    <p class="section-lead">If you find yourself doing one of these, pause. There's almost always a Cube view that already does it, or a request worth filing instead.</p>
+
+    <div class="anti-list">
+
+      <div class="anti-row">
+        <div class="anti-num">1</div>
+        <div>
+          <h4>Custom SQL written directly against our marts in a BI tool</h4>
+          <p>Power BI, Tableau, Looker, anywhere a custom dataset gets a hand-rolled SQL query against the warehouse.</p>
+          <div class="anti-why"><strong>Why it hurts:</strong> the joins are invisible to the rest of the org, the file isn't reviewed, and the query breaks the moment a mart changes.</div>
+        </div>
+      </div>
+
+      <div class="anti-row">
+        <div class="anti-num">2</div>
+        <div>
+          <h4>Pulling raw mart tables into a spreadsheet and joining with VLOOKUP</h4>
+          <p>Member table here, client table there, paste into a sheet, VLOOKUP the client name onto the member row.</p>
+          <div class="anti-why"><strong>Why it hurts:</strong> manual joins drift the moment one of the source tables updates. There's no audit trail of which version was used.</div>
+        </div>
+      </div>
+
+      <div class="anti-row">
+        <div class="anti-num">3</div>
+        <div>
+          <h4>Re-implementing joins in Power BI's M, DAX, or Tableau's calculated fields</h4>
+          <p>Defining the relationship between two tables inside the BI tool itself, using the tool's modeling layer.</p>
+          <div class="anti-why"><strong>Why it hurts:</strong> we end up with two semantic layers, one in Cube and one inside the BI file. They drift apart. Numbers stop matching.</div>
+        </div>
+      </div>
+
+      <div class="anti-row">
+        <div class="anti-num">4</div>
+        <div>
+          <h4>Production reports that depend on a notebook or script outside source control</h4>
+          <p>A Jupyter notebook, a Python script, an ad-hoc query that runs every Monday and emails a number to leadership.</p>
+          <div class="anti-why"><strong>Why it hurts:</strong> if the author leaves or the laptop dies, the recurring report dies with it. Nobody can audit how the number is calculated.</div>
+        </div>
+      </div>
+
+      <div class="anti-row">
+        <div class="anti-num">5</div>
+        <div>
+          <h4>"One-off" queries that quietly become permanent</h4>
+          <p>The query was for a single board meeting. Now it's the source for a monthly KPI and nobody remembers it was supposed to be temporary.</p>
+          <div class="anti-why"><strong>Why it hurts:</strong> permanent reporting belongs in the semantic layer with the same governance as everything else. Drift is guaranteed otherwise.</div>
+        </div>
+      </div>
+
+      <div class="anti-row">
+        <div class="anti-num">6</div>
+        <div>
+          <h4>Copy-pasting the same join logic into multiple files</h4>
+          <p>"I already wrote this for the eligibility report, let me paste it into the engagement report too."</p>
+          <div class="anti-why"><strong>Why it hurts:</strong> when the join needs to change, only one of the copies gets updated. We've now built a bug into the rest.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 05 Escalation path -->
+  <section class="block" id="escalation">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>When Cube can't answer your question</h2>
+      <span class="section-tag">The path that doesn't end in custom SQL</span>
+    </div>
+    <p class="section-lead">If you've checked the directory and Cube genuinely can't get you the answer, here's what to do instead of writing it yourself.</p>
+
+    <div class="steps-stack">
+      <div class="step-item">
+        <div class="step-circle">1</div>
+        <div>
+          <h4>Double-check the domain directory</h4>
+          <p>Skim the cards. Sometimes the field you need lives in a domain you didn't expect (e.g. eligibility data inside Member Journey, not Eligibility).</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">2</div>
+        <div>
+          <h4>Search #data-help</h4>
+          <p>Someone has probably asked something similar. The thread will either give you the answer or save you re-explaining the use case.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">3</div>
+        <div>
+          <h4>File a request with context</h4>
+          <p>Drop a note in #data-help with: what question you're trying to answer, which domains you tried, and what the use case is (one-off vs. recurring report). The data team will route it.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">4</div>
+        <div>
+          <h4>If it's recurring, expect a Cube view, not a custom query</h4>
+          <p>The right answer to "I need this every month" is a new view in Cube, not a one-off query you maintain. We'd rather invest the day building it properly than untangle a mart query a year from now.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 Approved exceptions -->
+  <section class="block" id="exceptions">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2>Approved exceptions</h2>
+      <span class="section-tag">When custom queries against marts are okay</span>
+    </div>
+
+    <div class="exceptions">
+      <h3>There are real cases where mart-level access is the right call.</h3>
+      <p>The point of this page isn't to say "never touch the marts." It's to say "don't promote a custom mart query to production without the same guardrails the semantic layer has." Custom queries are okay when:</p>
+      <ul>
+        <li>You're on the data team building or testing a Cube model.</li>
+        <li>You're doing genuine exploratory analysis and the output won't become a recurring report.</li>
+        <li>The query has been reviewed by the data team and lives in a code-controlled location with an owner and an expiry.</li>
+        <li>You've gotten an explicit sign-off because the use case is rare enough that a Cube view isn't justified.</li>
+      </ul>
+      <p style="margin-top:14px;">If your custom query doesn't meet one of those, it's an anti-pattern, even if it works today.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-panel">
+    <h2>Not sure if your use case is covered?</h2>
+    <p>Browse the domain directory or drop a note in #data-help. We'd much rather build you a clean view than discover a custom query in production six months from now.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="domain-directory.html">Open the domain directory →</a>
+      <a class="btn btn-secondary" href="index.html">Back to Knowledge Center</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>Semantic Layer Guardrails · Part of the Cube Knowledge Center</p>
+  <p>Maintained by Pelago Data &amp; Analytics. Suggestions welcome in <a href="#">#data-help</a>.</p>
+</footer>
+
+</body>
+</html>
