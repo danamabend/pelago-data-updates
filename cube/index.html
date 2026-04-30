@@ -336,6 +336,25 @@
     .card-featured { grid-column: span 1; }
   }
 
+  /* Intro row — locked to 3 across at desktop, stacks responsively */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 720px) {
+    .intro-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Video grid — fixed-ish column width so single videos don't stretch */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+    gap: 18px;
+    justify-content: start;
+  }
+
   /* Video cards */
   .video-card {
     background: var(--white);
@@ -344,6 +363,17 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  a.video-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(33, 38, 51, 0.08);
+    border-color: var(--maroon);
+    text-decoration: none;
+  }
+  a.video-card:hover .play-icon {
+    background: var(--maroon);
+    color: var(--white);
   }
   .video-thumb {
     aspect-ratio: 16 / 9;
@@ -790,8 +820,8 @@
       <div class="stat-label">Best practice guides</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Training video modules</div>
+      <div class="stat-num">8</div>
+      <div class="stat-label">Training videos</div>
     </div>
     <div class="stat-cell">
       <div class="stat-num">1</div>
@@ -892,45 +922,104 @@
     <div class="section-head">
       <span class="section-num">03</span>
       <h2>Training videos</h2>
-      <span class="section-tag">Watch first, prompt second</span>
+      <span class="section-tag">Watch first, prompt second. Each card is tagged with its category.</span>
     </div>
-    <div class="card-grid">
 
-      <div class="video-card">
+    <!-- Introduction row — start here -->
+    <div class="intro-grid">
+
+      <a class="video-card" href="https://www.loom.com/share/31649f27709643a18704adb06a838161" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
         <div class="video-thumb">
           <div class="play-icon">▶</div>
-          <span class="video-duration">8:42</span>
         </div>
         <div class="video-meta">
-          <span class="card-tag tag-video">Module 1 · Orientation</span>
-          <h4>What Cube is and how to ask your first question</h4>
-          <p>A 90-second tour of the interface, then a walk through three example prompts.</p>
+          <span class="card-tag tag-video">Introduction</span>
+          <h4>What is Cube?</h4>
+          <p>A first look at Pelago's natural-language interface to our data and what you can do with it.</p>
         </div>
-      </div>
+      </a>
 
-      <div class="video-card">
+      <a class="video-card" href="https://www.loom.com/share/cd0352d171174400bb8158408b7c3c2d" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
         <div class="video-thumb alt">
           <div class="play-icon">▶</div>
-          <span class="video-duration">11:17</span>
         </div>
         <div class="video-meta">
-          <span class="card-tag tag-video">Module 2 · Prompting</span>
-          <h4>Writing prompts that map to the schema</h4>
-          <p>Live walkthrough of the prompt structure pattern with real Pelago examples and the exact wording to copy.</p>
+          <span class="card-tag tag-video">Introduction</span>
+          <h4>What are Domains?</h4>
+          <p>The 15 slices of Pelago data Cube can answer questions across, in plain language.</p>
         </div>
-      </div>
+      </a>
 
-      <div class="video-card">
+      <a class="video-card" href="https://www.loom.com/share/d1de0f72f6484d57a3885bdd447f7b86" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
         <div class="video-thumb alt2">
           <div class="play-icon">▶</div>
-          <span class="video-duration">6:55</span>
         </div>
         <div class="video-meta">
-          <span class="card-tag tag-video">Module 3 · Recovery</span>
-          <h4>What to do when Cube returns the wrong answer</h4>
-          <p>The redirect playbook. How to spot a bad result fast and refine your way to the right one.</p>
+          <span class="card-tag tag-video">Introduction</span>
+          <h4>Cube Rollout: April Announcement</h4>
+          <p>The rollout context, the timeline, and what's changing for the team.</p>
         </div>
-      </div>
+      </a>
+
+    </div>
+
+    <!-- Library — everything else -->
+    <div class="video-grid">
+
+      <a class="video-card" href="https://www.loom.com/share/c75e9905953041c29e6c4f7b03b08a3b" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <div class="video-thumb">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-meta">
+          <span class="card-tag tag-video">Dashboards</span>
+          <h4>Cube Dashboard Navigation and Workbook Creation</h4>
+          <p>How to navigate dashboards and build your own workbooks. Practical walkthrough.</p>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.loom.com/share/cc1038e782a241658a0f9ff1d1692bda" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <div class="video-thumb alt">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-meta">
+          <span class="card-tag tag-video">AI</span>
+          <h4>Chat Analytics vs Dashboards</h4>
+          <p>When to use chat-based analytics, when to reach for a dashboard, and how the two complement each other.</p>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.loom.com/share/79606fbab72a4f389a75d14a8dc6c0a4" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <div class="video-thumb alt2">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-meta">
+          <span class="card-tag tag-video">AI</span>
+          <h4>Slack ↔ Cube Agent</h4>
+          <p>Asking Cube questions directly from Slack and getting answers in-channel.</p>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.loom.com/share/f8a32926c8514a37a6c84afc10fb313b" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <div class="video-thumb">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-meta">
+          <span class="card-tag tag-video">Design</span>
+          <h4>Methodology to Design</h4>
+          <p>How we approached designing the semantic layer. Useful context if you want to understand the why behind domains and joins.</p>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.loom.com/share/edab5fa6289b41c1af05f46687253adc" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <div class="video-thumb alt">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-meta">
+          <span class="card-tag tag-video">UAT</span>
+          <h4>UAT Guide for Users</h4>
+          <p>Walkthrough for UAT participants: what we're testing, how to log feedback, and where to ask questions.</p>
+        </div>
+      </a>
 
     </div>
   </section>
@@ -971,7 +1060,7 @@
           <li>Don't assume Cube knows your business definitions. Spell out "active users," "completed," etc.</li>
           <li>Don't use Cube for PHI lookups about a specific identifiable member. Use approved tools.</li>
           <li>Don't paste a Cube number into a board-level deck without checking the underlying query.</li>
-          <li>Don't write custom SQL against marts in BI tools. <a href="guardrails.html" style="color:var(--maroon); font-weight:600;">See why →</a></li>
+          <li>Don't write custom SQL against the marts in any tool. <a href="guardrails.html" style="color:var(--maroon); font-weight:600;">See why →</a></li>
           <li>Don't share Cube outputs externally without going through the standard data review process.</li>
         </ul>
       </div>
@@ -1075,8 +1164,8 @@
         <p>Open the domain directory. Each card describes the building block the domain tracks (e.g. one appointment, one eligible person). Find the one that sounds most like your question and start there.</p>
       </details>
       <details class="faq">
-        <summary>Can I just write SQL against the marts in Power BI to get what I need?</summary>
-        <p>Please don't, unless it's an approved exception. Custom queries against our marts bypass the join logic, validation, and version control that Cube provides. They quietly create maintenance debt that surfaces later as broken reports and conflicting numbers. Read the <a href="guardrails.html">semantic layer guardrails</a> for the why and the alternative path.</p>
+        <summary>Can I just write SQL against the marts to get what I need?</summary>
+        <p>Please don't, unless it's an approved exception. It doesn't matter whether the SQL lives inside a BI tool, a notebook, an AI assistant, or a SQL client. Custom queries against our marts bypass the join logic, validation, and version control that Cube provides. They quietly create maintenance debt that surfaces later as broken reports and conflicting numbers. Read the <a href="guardrails.html">semantic layer guardrails</a> for the why and the alternative path.</p>
       </details>
       <details class="faq">
         <summary>Can I trust Cube numbers in a client-facing deck?</summary>
@@ -1092,7 +1181,7 @@
       </details>
       <details class="faq">
         <summary>Where do I ask if my question isn't here?</summary>
-        <p>Drop a note in <strong>#data-help</strong> on Slack with your prompt and the result you got back. The team will route from there.</p>
+        <p>While Cube is in UAT, drop a note in <strong>#proj-cube-uat</strong> with your prompt and the result you got back. Once we go live, support moves to <strong>#support-data-team</strong>. The team will route from there either way.</p>
       </details>
     </div>
   </section>
@@ -1105,7 +1194,7 @@
     <div>
       <h3>Cube Knowledge Center</h3>
       <p>Pelago's home for learning how to ask better questions of our data. Maintained by the Data &amp; Analytics team.</p>
-      <p style="margin-top:14px;">Have a suggestion? Drop it in <a href="#">#data-help</a>.</p>
+      <p style="margin-top:14px;">Have a suggestion? Drop it in <a href="#">#proj-cube-uat</a> (UAT) or <a href="#">#support-data-team</a> (post-launch).</p>
     </div>
     <div>
       <h3>Reference</h3>
@@ -1121,7 +1210,8 @@
       <ul>
         <li><a href="#help">FAQ</a></li>
         <li><a href="#training">Training videos</a></li>
-        <li><a href="#">#data-help on Slack</a></li>
+        <li><a href="#">#proj-cube-uat (UAT)</a></li>
+        <li><a href="#">#support-data-team (post-launch)</a></li>
         <li><a href="#">Email Data &amp; Analytics</a></li>
       </ul>
     </div>

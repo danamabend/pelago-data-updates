@@ -119,6 +119,82 @@
     padding: 6px 12px; border-radius: 999px;
   }
 
+  /* Cube Knowledge Center banner */
+  .cube-banner {
+    margin-top: 32px;
+    background: var(--pelago-yellow);
+    border-radius: 24px;
+    padding: 36px 40px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .cube-banner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(33,38,51,0.12);
+  }
+  .cube-banner::before {
+    content: "";
+    position: absolute;
+    width: 220px; height: 220px;
+    background: var(--cream);
+    border-radius: 50%;
+    right: -80px; top: -100px;
+    opacity: 0.55;
+  }
+  .cube-banner::after {
+    content: "";
+    position: absolute;
+    width: 140px; height: 140px;
+    background: var(--maroon);
+    border-radius: 50%;
+    left: -60px; bottom: -70px;
+    opacity: 0.85;
+  }
+  .cube-banner-text {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 460px;
+  }
+  .cube-banner-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--maroon);
+    margin-bottom: 10px;
+  }
+  .cube-banner h2 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 28px;
+    color: var(--jet-black);
+    margin: 0 0 8px;
+  }
+  .cube-banner p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--jet-black);
+    max-width: 540px;
+  }
+  .cube-banner-cta {
+    background: var(--jet-black);
+    color: var(--pelago-yellow);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+  }
+
   /* Section title */
   h2.section-title {
     font-size: 28px;
@@ -211,6 +287,8 @@
     .top { padding: 36px 28px; border-radius: 24px; }
     .top h1 { font-size: 32px; }
     .grid { grid-template-columns: 1fr; }
+    .cube-banner { padding: 26px 24px; }
+    .cube-banner h2 { font-size: 22px; }
   }
 </style>
 </head>
@@ -230,6 +308,15 @@
     </div>
     <span class="pill">Up next</span>
   </div>
+
+  <a href="cube/" class="cube-banner">
+    <div class="cube-banner-text">
+      <div class="cube-banner-eyebrow">Now live</div>
+      <h2>Cube Knowledge Center</h2>
+      <p>Everything you need to use Pelago's Cube semantic layer with confidence: prompting guides, training videos, semantic-layer guardrails, and a directory of every domain you can query. Start here for any Cube question.</p>
+    </div>
+    <span class="cube-banner-cta">Explore →</span>
+  </a>
 
   <h2 class="section-title">Monthly updates</h2>
 

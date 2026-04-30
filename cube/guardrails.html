@@ -684,7 +684,7 @@
     <div class="cost-grid">
       <div class="cost-card">
         <h4>No version control</h4>
-        <p>A query saved inside a Power BI file or a notebook can't be reviewed, traced, or rolled back. Nobody outside the file knows it exists.</p>
+        <p>A query saved inside a BI file, a notebook, or an AI chat can't be reviewed, traced, or rolled back. Nobody outside that surface knows it exists.</p>
       </div>
       <div class="cost-card">
         <h4>Brittle to upstream changes</h4>
@@ -711,7 +711,7 @@
     <div class="case">
       <div class="case-eyebrow">A pattern we want to stop repeating</div>
       <h3>One overbuilt query inside a BI file is a small problem. Twenty of them is the data team's whole roadmap.</h3>
-      <p>We've already seen what happens when join logic gets baked into a single Power BI file with no review and no source control. The query worked at first. The author moved on. The marts evolved. Now the report ships numbers that look reasonable and aren't, and nobody is sure which fields it was supposed to be joining in the first place.</p>
+      <p>We've already seen what happens when join logic gets baked into a single file with no review and no source control. It can be a BI workbook, a notebook, an AI-generated query, a spreadsheet. The query works at first. The author moves on. The marts evolve. The report ships numbers that look reasonable and aren't, and nobody is sure which fields it was supposed to be joining in the first place.</p>
       <p>That's the failure mode this page exists to prevent.</p>
     </div>
   </section>
@@ -763,8 +763,8 @@
       <div class="anti-row">
         <div class="anti-num">1</div>
         <div>
-          <h4>Custom SQL written directly against our marts in a BI tool</h4>
-          <p>Power BI, Tableau, Looker, anywhere a custom dataset gets a hand-rolled SQL query against the warehouse.</p>
+          <h4>Custom SQL written directly against our marts</h4>
+          <p>Anywhere a hand-rolled SQL query touches the warehouse: a BI tool, a notebook, a SQL client, an AI assistant. It doesn't matter where the query was authored. If it bypasses Cube, it bypasses the guardrails.</p>
           <div class="anti-why"><strong>Why it hurts:</strong> the joins are invisible to the rest of the org, the file isn't reviewed, and the query breaks the moment a mart changes.</div>
         </div>
       </div>
@@ -781,9 +781,9 @@
       <div class="anti-row">
         <div class="anti-num">3</div>
         <div>
-          <h4>Re-implementing joins in Power BI's M, DAX, or Tableau's calculated fields</h4>
-          <p>Defining the relationship between two tables inside the BI tool itself, using the tool's modeling layer.</p>
-          <div class="anti-why"><strong>Why it hurts:</strong> we end up with two semantic layers, one in Cube and one inside the BI file. They drift apart. Numbers stop matching.</div>
+          <h4>Re-implementing joins inside another tool's modeling layer</h4>
+          <p>Defining the relationship between two tables in a BI tool's data model, in a notebook's join logic, or in a script that becomes a recurring report.</p>
+          <div class="anti-why"><strong>Why it hurts:</strong> we end up with two semantic layers. One lives in Cube where it's reviewed and tested. The other lives in someone's file where it isn't. They drift apart. Numbers stop matching.</div>
         </div>
       </div>
 
@@ -837,15 +837,15 @@
       <div class="step-item">
         <div class="step-circle">2</div>
         <div>
-          <h4>Search #data-help</h4>
-          <p>Someone has probably asked something similar. The thread will either give you the answer or save you re-explaining the use case.</p>
+          <h4>Search the support channel</h4>
+          <p>Someone has probably asked something similar. The thread will either give you the answer or save you re-explaining the use case. While Cube is in UAT, that's <strong>#proj-cube-uat</strong>. Once we go live, it's <strong>#support-data-team</strong>.</p>
         </div>
       </div>
       <div class="step-item">
         <div class="step-circle">3</div>
         <div>
           <h4>File a request with context</h4>
-          <p>Drop a note in #data-help with: what question you're trying to answer, which domains you tried, and what the use case is (one-off vs. recurring report). The data team will route it.</p>
+          <p>Drop a note in the support channel (<strong>#proj-cube-uat</strong> during UAT, <strong>#support-data-team</strong> post-launch) with: what question you're trying to answer, which domains you tried, and what the use case is (one-off vs. recurring report). The data team will route it.</p>
         </div>
       </div>
       <div class="step-item">
@@ -882,7 +882,7 @@
   <!-- CTA -->
   <div class="cta-panel">
     <h2>Not sure if your use case is covered?</h2>
-    <p>Browse the domain directory or drop a note in #data-help. We'd much rather build you a clean view than discover a custom query in production six months from now.</p>
+    <p>Browse the domain directory or drop a note in <strong>#proj-cube-uat</strong> (UAT) or <strong>#support-data-team</strong> (post-launch). We'd much rather build you a clean view than discover a custom query in production six months from now.</p>
     <div class="btn-row">
       <a class="btn btn-primary" href="domain-directory.html">Open the domain directory →</a>
       <a class="btn btn-secondary" href="index.html">Back to Knowledge Center</a>
@@ -894,7 +894,7 @@
 <!-- FOOTER -->
 <footer class="site-footer">
   <p>Semantic Layer Guardrails · Part of the Cube Knowledge Center</p>
-  <p>Maintained by Pelago Data &amp; Analytics. Suggestions welcome in <a href="#">#data-help</a>.</p>
+  <p>Maintained by Pelago Data &amp; Analytics. Suggestions welcome in <a href="#">#proj-cube-uat</a> (UAT) or <a href="#">#support-data-team</a> (post-launch).</p>
 </footer>
 
 </body>
