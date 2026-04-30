@@ -850,7 +850,7 @@
       <a class="pathway" href="domain-directory.html">
         <div class="pathway-num">3</div>
         <h4>I don't know which domain to use</h4>
-        <p>Open the domain directory. Each card walks you through what it tracks.</p>
+        <p>Start with the Cube Enterprise Agent or open the domain directory. Each card walks you through what it tracks.</p>
       </a>
     </div>
   </section>
@@ -1161,7 +1161,7 @@
       </details>
       <details class="faq">
         <summary>How do I know which domain my question lives in?</summary>
-        <p>Open the domain directory. Each card describes the building block the domain tracks (e.g. one appointment, one eligible person). Find the one that sounds most like your question and start there.</p>
+        <p>Start with the Cube Enterprise Agent. It will route your question to the right domain automatically. If you'd rather learn the landscape yourself, open the <a href="domain-directory.html">domain directory</a>. Each card describes the building block the domain tracks (e.g. one appointment, one eligible person) so you can pick where to start.</p>
       </details>
       <details class="faq">
         <summary>Can I just write SQL against the marts to get what I need?</summary>
@@ -1173,11 +1173,11 @@
       </details>
       <details class="faq">
         <summary>Is it safe to look up an individual member in Cube?</summary>
-        <p>No. Cube is for aggregate, analytical questions. Identifiable member lookups go through approved clinical and ops tools, not natural-language analytics.</p>
+        <p>Cube has row-level security enabled, just like Looker. If your role is approved to see that information, it's safe and you'll see it. If your role isn't approved, access is restricted automatically. The same governance you're used to in Looker carries over.</p>
       </details>
       <details class="faq">
-        <summary>I can't tell if Cube used the right join path. Where do I check?</summary>
-        <p>Cube exposes the underlying schema elements it used for each result. If a cross-domain answer looks off, the most likely cause is a join path. Add hints to your prompt ("to use industry_type, you may need to join to the client_profile data set") and rerun.</p>
+        <summary>Can Cube integrate with Slack?</summary>
+        <p>Yes. You can ask Cube questions directly from Slack and get answers back in-channel. Watch the walkthrough: <a href="https://www.loom.com/share/79606fbab72a4f389a75d14a8dc6c0a4" target="_blank" rel="noopener">Slack ↔ Cube Agent</a>.</p>
       </details>
       <details class="faq">
         <summary>Where do I ask if my question isn't here?</summary>
@@ -1194,6 +1194,7 @@
     <div>
       <h3>Cube Knowledge Center</h3>
       <p>Pelago's home for learning how to ask better questions of our data. Maintained by the Data &amp; Analytics team.</p>
+      <p style="margin-top:14px;">Looking for more? Additional guides live on the <a href="https://www.notion.so/pelagohealth/Cube-Knowledge-Center-2dc42c7bd8b48094ba79dca120574e4d" target="_blank" rel="noopener">Cube Knowledge Center on Notion</a>.</p>
       <p style="margin-top:14px;">Have a suggestion? Drop it in <a href="#">#proj-cube-uat</a> (UAT) or <a href="#">#support-data-team</a> (post-launch).</p>
     </div>
     <div>
@@ -1203,6 +1204,7 @@
         <li><a href="domain-directory.html">Domain directory</a></li>
         <li><a href="guardrails.html">Semantic layer guardrails</a></li>
         <li><a href="#cheat">Pattern cheat sheet</a></li>
+        <li><a href="https://www.notion.so/pelagohealth/Cube-Knowledge-Center-2dc42c7bd8b48094ba79dca120574e4d" target="_blank" rel="noopener">Cube Knowledge Center on Notion</a></li>
       </ul>
     </div>
     <div>
