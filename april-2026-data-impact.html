@@ -1,519 +1,490 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>April 2026 Data Impact — Pelago</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Roboto+Slab:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: #FFF4DC; color: #212633; min-height: 100vh; line-height: 1.6; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>April 2026 Data Impact — Pelago Data Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pelago-yellow: #FAE355;
+    --jet-black: #212633;
+    --white: #FFFFFF;
+    --maroon: #722F49;
+    --moss: #4D6525;
+    --cerulean: #A4BDFF;
+    --punch: #EEBCFF;
+    --tea: #DDF1C4;
+    --mist: #E8EEFF;
+    --tan: #BDA98C;
+    --peach: #FCD3BF;
+    --cream: #FFF4DC;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--cream);
+    color: var(--jet-black);
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Roboto Slab', Georgia, serif;
+    color: var(--jet-black);
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  a { color: var(--maroon); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  a:hover { color: var(--jet-black); }
 
-    :root {
-      --yello: #FAE355; --black: #212633; --white: #FFFFFF;
-      --maroon: #722F49; --moss: #4D6525; --cerulean: #A4BDFF;
-      --punch: #EEBCFF; --tea: #DDF1C4; --mist: #E8EEFF;
-      --tan: #BDA98C; --peach: #FCD3BF; --cream: #FFF4DC;
-      --r: 16px;
-    }
+  /* Layout */
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 48px 28px 72px; }
 
-    /* NAV */
-    .nav { background: var(--black); height: 56px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-mark { width: 28px; height: 28px; background: var(--yello); border-radius: 50% 50% 50% 20%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: var(--black); }
-    .nav-name { font-family: 'Roboto Slab', serif; font-weight: 600; font-size: 16px; color: var(--white); }
-    .nav-badge { background: var(--maroon); color: var(--white); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+  /* Hero */
+  .hero {
+    background: var(--jet-black);
+    color: var(--white);
+    border-radius: 32px;
+    padding: 56px 56px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    width: 320px; height: 320px;
+    background: var(--pelago-yellow);
+    border-radius: 50%;
+    right: -120px; top: -120px;
+    opacity: 0.95;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    width: 200px; height: 200px;
+    background: var(--punch);
+    border-radius: 50%;
+    right: 80px; bottom: -90px;
+    opacity: 0.55;
+  }
+  .hero .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pelago-yellow);
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero h1 {
+    color: var(--white);
+    font-size: 48px;
+    font-weight: 700;
+    max-width: 720px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero p.lede {
+    color: var(--cream);
+    font-size: 18px;
+    max-width: 620px;
+    margin-top: 18px;
+    position: relative;
+    z-index: 2;
+  }
 
-    /* HERO */
-    .hero { background: var(--black); padding: 56px 40px 64px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; width: 480px; height: 480px; background: var(--yello); opacity: 0.06; border-radius: 50% 60% 40% 55%; top: -160px; right: -80px; pointer-events: none; }
-    .hero::after { content: ''; position: absolute; width: 280px; height: 180px; background: var(--maroon); opacity: 0.1; border-radius: 60% 40% 55% 50%; bottom: -60px; left: 80px; pointer-events: none; }
-    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
-    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--yello); margin-bottom: 12px; }
-    .hero-title { font-family: 'Roboto Slab', serif; font-size: clamp(28px, 4vw, 46px); font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 14px; letter-spacing: -0.5px; }
-    .hero-title span { color: var(--yello); }
-    .hero-sub { color: rgba(255,255,255,0.55); font-size: 15px; max-width: 600px; line-height: 1.7; margin-bottom: 32px; }
+  /* Hero stats */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+    position: relative;
+    z-index: 2;
+  }
+  .stat {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 18px;
+    padding: 20px 22px;
+  }
+  .stat .num {
+    font-family: 'Roboto Slab', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--pelago-yellow);
+    display: block;
+    line-height: 1.05;
+  }
+  .stat .label {
+    font-size: 13px;
+    color: var(--cream);
+    margin-top: 6px;
+    display: block;
+  }
 
-    /* HERO STATS */
-    .hero-stats { display: flex; gap: 12px; flex-wrap: wrap; }
-    .stat { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 16px 20px; min-width: 120px; }
-    .stat-num { font-family: 'Roboto Slab', serif; font-size: 28px; font-weight: 700; color: var(--yello); line-height: 1; margin-bottom: 4px; }
-    .stat-label { font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 500; line-height: 1.4; text-transform: uppercase; letter-spacing: 0.5px; }
+  /* Sections */
+  section.block {
+    margin-top: 44px;
+    background: var(--white);
+    border-radius: 28px;
+    padding: 40px 44px;
+    border: 1px solid rgba(33,38,51,0.06);
+  }
+  section.block.tinted-tea { background: var(--tea); }
+  section.block.tinted-mist { background: var(--mist); }
+  section.block.tinted-cream { background: var(--cream); border: 1px solid rgba(33,38,51,0.08); }
+  section.block.tinted-peach { background: var(--peach); }
 
-    /* MAIN */
-    .main { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; display: flex; flex-direction: column; gap: 40px; }
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--jet-black);
+    color: var(--pelago-yellow);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+  section h2 { font-size: 30px; }
+  section h3 { font-size: 18px; margin-top: 22px; margin-bottom: 6px; font-weight: 700; }
+  section p { font-size: 16px; color: var(--jet-black); }
 
-    /* SECTION LABEL */
-    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--tan); margin-bottom: 16px; }
+  /* Cards inside sections */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 18px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid rgba(33,38,51,0.08);
+    border-radius: 18px;
+    padding: 22px 24px;
+  }
+  .tinted-tea .card, .tinted-mist .card, .tinted-cream .card, .tinted-peach .card { background: var(--white); }
+  .card h4 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .card p { font-size: 15px; margin: 0; color: var(--jet-black); }
+  .tag {
+    display: inline-block;
+    background: var(--pelago-yellow);
+    color: var(--jet-black);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .tag.maroon { background: var(--maroon); color: var(--white); }
+  .tag.moss { background: var(--moss); color: var(--white); }
+  .tag.cerulean { background: var(--cerulean); color: var(--jet-black); }
+  .tag.tan { background: var(--tan); color: var(--white); }
 
-    /* CARD BASE */
-    .card { background: var(--white); border-radius: var(--r); padding: 28px 32px; box-shadow: 0 2px 16px rgba(33,38,51,0.06); }
-    .card-title { font-family: 'Roboto Slab', serif; font-size: 17px; font-weight: 700; color: var(--black); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-    .card-subtitle { font-size: 13px; color: #6b7280; margin-bottom: 20px; font-style: italic; line-height: 1.6; }
+  /* Lists */
+  ul.clean {
+    list-style: none;
+    padding: 0; margin: 16px 0 0;
+  }
+  ul.clean li {
+    padding: 14px 0;
+    border-top: 1px dashed rgba(33,38,51,0.18);
+    font-size: 16px;
+  }
+  ul.clean li:first-child { border-top: none; }
+  ul.clean strong { font-family: 'Roboto Slab', serif; font-weight: 700; }
 
-    /* TWO COL */
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+  /* Caught mini-stat row */
+  .caught-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 22px 0 8px;
+  }
+  .caught-stat {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 18px 20px;
+    border: 1px solid rgba(33,38,51,0.08);
+  }
+  .caught-stat .n {
+    font-family: 'Roboto Slab', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--moss);
+    display: block;
+  }
+  .caught-stat .l { font-size: 13px; color: var(--jet-black); margin-top: 4px; }
 
-    /* OUTCOME LIST */
-    .outcome-list { display: flex; flex-direction: column; gap: 16px; }
-    .outcome-item { padding-left: 20px; position: relative; }
-    .outcome-item::before { content: '→'; position: absolute; left: 0; color: var(--maroon); font-weight: 700; }
-    .outcome-item strong { display: block; font-size: 14px; color: var(--black); margin-bottom: 2px; }
-    .outcome-item span { font-size: 13px; color: #6b7280; line-height: 1.5; }
+  /* Always-on rail */
+  .always-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .always-grid .row {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 18px 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .always-grid .icon {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--pelago-yellow);
+    color: var(--jet-black);
+    display: grid; place-items: center;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .always-grid h4 { margin: 0 0 4px; font-size: 16px; }
+  .always-grid p { font-size: 14px; margin: 0; color: var(--jet-black); }
 
-    /* ACTIVATION LIST */
-    .activation-list { display: flex; flex-direction: column; gap: 14px; }
-    .activation-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; background: #FAFAFA; border-radius: 10px; border: 1px solid #f0f0f0; }
-    .activation-pill { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; white-space: nowrap; margin-top: 2px; }
-    .pill-data { background: var(--mist); color: #3a4fb5; }
-    .pill-product { background: var(--peach); color: #9a4200; }
-    .pill-growth { background: var(--tea); color: var(--moss); }
-    .activation-body strong { font-size: 13px; color: var(--black); display: block; margin-bottom: 2px; }
-    .activation-body span { font-size: 12px; color: #6b7280; line-height: 1.5; }
+  /* Footer */
+  footer {
+    margin-top: 56px;
+    padding: 24px 0 0;
+    border-top: 1px solid rgba(33,38,51,0.12);
+    color: var(--jet-black);
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer .logo {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 16px;
+  }
 
-    /* QUALITY CARD */
-    .quality-card { background: var(--black); border-radius: var(--r); padding: 32px; overflow: hidden; position: relative; }
-    .quality-card::before { content: ''; position: absolute; width: 300px; height: 300px; background: var(--moss); opacity: 0.06; border-radius: 50%; top: -100px; right: -80px; pointer-events: none; }
-    .quality-card .card-title { color: var(--white); }
-    .quality-card .card-subtitle { color: rgba(255,255,255,0.45); }
-    .quality-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
-    @media (max-width: 560px) { .quality-stats { grid-template-columns: 1fr 1fr; } }
-    .q-stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px 20px; }
-    .q-stat-num { font-family: 'Roboto Slab', serif; font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
-    .q-stat-num.green { color: #7be08a; }
-    .q-stat-num.yellow { color: var(--yello); }
-    .q-stat-num.blue { color: var(--cerulean); }
-    .q-stat-label { font-size: 11px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.4; }
-    .incident-list { display: flex; flex-direction: column; gap: 12px; }
-    .incident-row { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 16px 18px; border-left: 3px solid; }
-    .incident-row.upstream { border-color: var(--cerulean); }
-    .incident-row.resolved { border-color: #7be08a; }
-    .incident-title { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-    .incident-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
-    .incident-tag { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .tag-upstream { background: rgba(164,189,255,0.15); color: var(--cerulean); }
-    .tag-resolved { background: rgba(123,224,138,0.15); color: #7be08a; }
-    .tag-sprint { background: rgba(250,227,85,0.1); color: var(--yello); }
-    .incident-desc { font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.6; }
-
-    /* ALWAYS ON */
-    .always-on { background: var(--mist); border-radius: var(--r); padding: 32px; }
-    .always-on .card-title { color: var(--black); }
-    .always-on .card-subtitle { color: #5a6070; }
-    .ops-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
-    .ops-card { background: var(--white); border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 8px rgba(33,38,51,0.05); }
-    .ops-icon { font-size: 20px; margin-bottom: 8px; }
-    .ops-name { font-size: 12px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
-    .ops-desc { font-size: 12px; color: #6b7280; line-height: 1.5; }
-    .ops-pulse { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--moss); margin-top: 6px; }
-    .ops-pulse::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--moss); box-shadow: 0 0 0 2px rgba(77,101,37,0.2); }
-
-    /* AI CORNER */
-    .ai-card { background: var(--black); border-radius: var(--r); padding: 32px; overflow: hidden; position: relative; }
-    .ai-card::before { content: ''; position: absolute; width: 360px; height: 360px; background: var(--punch); opacity: 0.05; border-radius: 50% 40% 60% 45%; top: -120px; right: -100px; pointer-events: none; }
-    .ai-card::after { content: ''; position: absolute; width: 200px; height: 200px; background: var(--cerulean); opacity: 0.04; border-radius: 45% 55% 40% 60%; bottom: -60px; left: 40px; pointer-events: none; }
-    .ai-card .card-title { color: var(--white); }
-    .ai-card .card-subtitle { color: rgba(255,255,255,0.45); }
-    .ai-grid { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
-    .ai-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px 20px; display: flex; align-items: flex-start; gap: 14px; }
-    .ai-status { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; white-space: nowrap; margin-top: 2px; }
-    .ai-done { background: rgba(123,224,138,0.15); color: #7be08a; }
-    .ai-review { background: rgba(250,227,85,0.15); color: var(--yello); }
-    .ai-progress { background: rgba(164,189,255,0.15); color: var(--cerulean); }
-    .ai-body strong { font-size: 13px; color: var(--white); display: block; margin-bottom: 3px; }
-    .ai-body span { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.5; }
-
-    /* CLIENT GRID */
-    .client-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-    .client-chip { background: var(--white); border: 1px solid rgba(189,169,140,0.3); border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 500; color: #444a5a; box-shadow: 0 1px 4px rgba(33,38,51,0.04); }
-
-    /* NEXT MONTH */
-    .next-card { background: var(--black); border-radius: var(--r); padding: 32px; position: relative; overflow: hidden; }
-    .next-card::after { content: ''; position: absolute; width: 240px; height: 240px; background: var(--yello); opacity: 0.04; border-radius: 50% 60% 40% 55%; bottom: -80px; right: -60px; pointer-events: none; }
-    .next-card .card-title { color: var(--white); }
-    .next-card .card-subtitle { color: rgba(255,255,255,0.4); }
-    .next-list { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
-    .next-item { display: flex; gap: 14px; align-items: flex-start; }
-    .next-num { background: var(--maroon); color: var(--white); font-size: 11px; font-weight: 700; width: 20px; min-width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
-    .next-body strong { font-size: 14px; color: var(--white); display: block; margin-bottom: 2px; }
-    .next-body span { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.5; }
-
-    /* CUBE PROGRESS */
-    .cube-bar-wrap { margin-top: 20px; }
-    .cube-phases { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-    .phase-badge { font-size: 11px; font-weight: 600; padding: 4px 11px; border-radius: 20px; }
-    .phase-done { background: var(--tea); color: var(--moss); }
-    .phase-active { background: var(--yello); color: var(--black); }
-    .phase-next { background: rgba(33,38,51,0.08); color: var(--tan); }
-    .cube-bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden; margin-bottom: 6px; }
-    .cube-bar-fill { height: 100%; background: linear-gradient(90deg, #7be08a, var(--yello)); border-radius: 10px; width: 72%; transition: width 1s ease; }
-    .cube-bar-label { font-size: 11px; color: rgba(255,255,255,0.35); }
-
-    /* DIVIDER */
-    .divider { height: 1px; background: linear-gradient(to right, transparent, var(--tan), transparent); opacity: 0.3; }
-
-    /* FOOTER */
-    footer { background: var(--black); padding: 28px 40px; text-align: center; }
-    footer p { font-size: 12px; color: rgba(255,255,255,0.3); }
-    footer strong { color: var(--yello); }
-    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
-    footer a:hover { color: var(--yello); }
-  </style>
+  /* Responsive */
+  @media (max-width: 800px) {
+    .wrap { padding: 28px 16px 56px; }
+    .hero { padding: 36px 28px; border-radius: 24px; }
+    .hero h1 { font-size: 34px; }
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    section.block { padding: 28px 22px; border-radius: 22px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .always-grid { grid-template-columns: 1fr; }
+    .caught-row { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
+<div class="wrap">
 
-<nav class="nav">
-  <a class="nav-logo" href="index.html">
-    <div class="nav-mark">P</div>
-    <span class="nav-name">Pelago</span>
-  </a>
-  <span class="nav-badge">Data Team · April 2026</span>
-</nav>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow">Pelago Data Team · April 2026</div>
+    <h1>The system that makes your numbers trustworthy.</h1>
+    <p class="lede">78 tickets shipped. Pangea Wave 1 closed and Wave 2 underway. Cube UAT live with two waves of users. Ten data quality issues caught before any of them reached a dashboard.</p>
+    <div class="stat-row">
+      <div class="stat"><span class="num">78</span><span class="label">Tickets shipped</span></div>
+      <div class="stat"><span class="num">10</span><span class="label">dbt catches before dashboards</span></div>
+      <div class="stat"><span class="num">15+</span><span class="label">Client accounts served</span></div>
+      <div class="stat"><span class="num">0</span><span class="label">Internal pipeline failures reaching users</span></div>
+    </div>
+  </header>
 
-<header class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Data Team · Monthly Impact</div>
-    <h1 class="hero-title">April 2026<br><span>Data Impact</span></h1>
-    <p class="hero-sub">85 tickets shipped. Pangea Wave 1 complete. 16 data quality issues caught before any dashboard. 17+ clients served. Here's what your data team did in April.</p>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">85</div>
-        <div class="stat-label">Tickets shipped<br>this month</div>
+  <!-- WHAT YOU CAN ACT ON -->
+  <section class="block tinted-cream">
+    <div class="section-head"><span class="pill">Live now</span></div>
+    <h2>What you can act on</h2>
+    <p>Capabilities that shipped this month and are available to leadership and clients today.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <span class="tag">Cube</span>
+        <h4>Cube UAT Wave 1, live</h4>
+        <p>Wave 1 users are testing core semantic views. Issues are surfacing as expected, the validation loop is working as designed, and Wave 2 onboarding starts the week of 4/27. Cube AI Enterprise Agent is configured across all semantic views (DE-6700).</p>
       </div>
-      <div class="stat">
-        <div class="stat-num">16</div>
-        <div class="stat-label">Quality issues caught<br>before any dashboard</div>
+      <div class="card">
+        <span class="tag moss">Pangea</span>
+        <h4>Pangea Wave 1 complete</h4>
+        <p>Billing logic, eligibility datamart, user-source ingestion, and the supporting pipeline are all delivered. The Pangea member fields are now live in the eligibility datamart (DE-6525) and source models for Pangea client reporting are in place (DE-6667).</p>
       </div>
-      <div class="stat">
-        <div class="stat-num">17+</div>
-        <div class="stat-label">Clients served<br>this month</div>
+      <div class="card">
+        <span class="tag maroon">Reporting</span>
+        <h4>IBX reporting live in Cube</h4>
+        <p>Independence Blue Cross reporting has been migrated and is running in Cube, ahead of the broader Looker cutover. This is the first major client reporting workload running natively on the new semantic layer.</p>
       </div>
-      <div class="stat">
-        <div class="stat-num">0</div>
-        <div class="stat-label">Data issues that reached<br>a dashboard undetected</div>
+      <div class="card">
+        <span class="tag cerulean">Member experience</span>
+        <h4>Lifecycle &amp; engagement plumbing</h4>
+        <p>Renewal-billing eligibility flag for lifecycle campaigns is live (DE-6615). Unsubscribed attribute now flows to member_details (DE-6623). Eligibility date is surfaced on user profiles (DE-6673). Iterable timezone normalization landed (DE-6695).</p>
       </div>
-      <div class="stat">
-        <div class="stat-num">4</div>
-        <div class="stat-label">AI automations<br>shipped &amp; live</div>
+      <div class="card">
+        <span class="tag tan">Claims &amp; clients</span>
+        <h4>Client-specific data work shipped</h4>
+        <p>Sequoia Multiprogram company-ID filter corrected (DE-6515). Valmont removed from claims alerts (DE-6550). Aetna medical claims ingestion expanded to RPM (DE-6590). Alight ATT manual members supported (DE-6674). Guitar Center duplicate-profile suppression in place (DE-5300).</p>
+      </div>
+      <div class="card">
+        <span class="tag">Looker right-sizing</span>
+        <h4>Looker contract runway, leaner</h4>
+        <p>Ahead of renewal, the team audited license usage, downgraded unused seats, and right-sized roles. Pelago is entering negotiations with a smaller, justified footprint.</p>
+      </div>
+      <div class="card">
+        <span class="tag moss">Vendor exit POC</span>
+        <h4>In-house dev-sanitized pipeline POC, complete</h4>
+        <p>The proof of concept for replacing Tonic Structural with an in-house dev-sanitized pipeline is complete and validated. This unlocks the decision not to renew Tonic Structural and gives the team a sanitization path that better serves both day-to-day data work and the Galapagos initiative.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Platform</span>
+        <h4>Airflow environment hardening</h4>
+        <p>Shibangi led a wave of platform improvements on Airflow: instance right-sizing across MWAA environments, dbt log cleanup policy in qg-airflow, and runtime stability fixes that closed out the conditions behind both April Airflow incidents. The environment is now configured to absorb load it previously couldn't.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Platform</span>
+        <h4>Typeform pipeline migrated, Airbyte → Airflow</h4>
+        <p>The Typeform ingestion pipeline moved off Airbyte and onto our native Airflow stack. One fewer third-party dependency, consistent observability with the rest of our pipelines, and lower run-cost.</p>
+      </div>
+      <div class="card">
+        <span class="tag cerulean">Iterable</span>
+        <h4>Custom email lists for HPE &amp; BBU</h4>
+        <p>Custom email list functionality is now enabled in Iterable for HPE and BBU. Lifecycle marketing can run targeted outreach for these accounts without the workarounds we previously relied on.</p>
       </div>
     </div>
-  </div>
-</header>
+  </section>
 
-<main class="main">
+  <!-- READY FOR ACTIVATION -->
+  <section class="block tinted-mist">
+    <div class="section-head"><span class="pill">Ready for activation</span></div>
+    <h2>Ready for activation</h2>
+    <p>Work delivered this month that is now waiting on go-live decisions, UAT sign-off, or partner readiness.</p>
 
-  <!-- SECTION 1: WHAT YOU CAN NOW ACT ON -->
-  <section>
-    <div class="section-label">What you can now act on</div>
-    <div class="card">
-      <div class="card-title">✅ New capabilities delivered this month</div>
-      <div class="card-subtitle">Work that unlocks a decision, answers a question, or enables an action that wasn't possible before April.</div>
-      <div class="two-col">
-        <div class="outcome-list">
-          <div class="outcome-item">
-            <strong>Pangea Wave 1 is fully delivered</strong>
-            <span>Billing logic, eligibility datamart, member fields, user source ingestion, and data pipeline all complete. The data team's foundational Pangea work is done — Wave 2 analytical layer is already underway.</span>
-          </div>
-          <div class="outcome-item">
-            <strong>Cube UAT Wave 1 complete — Wave 2 onboarding next week</strong>
-            <span>UAT Wave 1 feedback collected and the team is actively working through it. Reporting assets, access policies, and data masking are live. Wave 2 users begin onboarding next week. <a href="https://danamabend.github.io/pelago-data-updates/cube-announcement.html" style="color:var(--maroon); font-weight:600;">View the Cube launch announcement →</a></span>
-          </div>
-          <div class="outcome-item">
-            <strong>Aetna medical claims pipeline is live</strong>
-            <span>RPM International, KnitWell, and Alex Lee can now have their claims data ingested and analyzed through a single, standardized Aetna pipeline. Costco billing datafeed also delivered.</span>
-          </div>
+    <ul class="clean">
+      <li><strong>Appointment Activity domain — UAT.</strong> Domain modeling complete and ready for analyst sign-off (DE-5788).</li>
+      <li><strong>Claims domain — UAT.</strong> Claims domain ready for analyst sign-off (DE-5809).</li>
+      <li><strong>Cube data masking in access policy.</strong> Sensitive fields now correctly masked at the semantic-layer access policy. Awaiting downstream verification before Wave 2 expansion (DE-6523).</li>
+      <li><strong>Cube UAT Wave 2.</strong> Wave 2 cohort identified. Onboarding kicks off the week of 4/27.</li>
+      <li><strong>Spectra → Cube cutover prep.</strong> The team is reverse-engineering the Power BI Spectra model so it transfers cleanly into the Cube semantic layer when Looker is deprecated.</li>
+      <li><strong>Pangea client reporting analytical layer.</strong> Source models in place (DE-6667). Analytical model build and metric calculations begin next sprint.</li>
+    </ul>
+  </section>
+
+  <!-- WHAT WE CAUGHT -->
+  <section class="block tinted-tea">
+    <div class="section-head"><span class="pill">Quality posture</span></div>
+    <h2>What we caught</h2>
+    <p>The dbt test suite is the safety net between data and decisions. When it fires, the pipeline halts the bad data before it reaches a dashboard. That is the system working.</p>
+
+    <div class="caught-row">
+      <div class="caught-stat"><span class="n">10</span><span class="l">Data quality issues caught before any reached a dashboard</span></div>
+      <div class="caught-stat"><span class="n">3</span><span class="l">Operational incidents this month</span></div>
+      <div class="caught-stat"><span class="n">0</span><span class="l">Pipeline-integrity failures reaching internal users</span></div>
+    </div>
+
+    <h3>Operational incidents and root cause</h3>
+    <ul class="clean">
+      <li><strong>Apr 13–14 · Airflow Resource Upgrade Outage.</strong> All Airflow DAGs began queueing on the morning of Apr 13 from resource exhaustion in our managed Airflow environment (MWAA). Root cause was infrastructure capacity, not pipeline logic. The MWAA environment was upgraded to xlarge and pipelines fully restored Apr 14. Stakeholder visibility, no client impact.</li>
+      <li><strong>Apr 15 · Airflow dbt Log Accumulation.</strong> Same family of issue: dbt logs were accruing in the Airflow environment without a cleanup policy and exhausted disk. Logs cleaned up in the qg-airflow repo, the backend instance was upgraded to 2xlarge, and a cleanup policy is in place. Same-day resolution, limited visibility.</li>
+      <li><strong>Apr 21 · Duplicate Guitar Center users in Iterable.</strong> A Guitar Center folder rename caused new eligibility_references to be generated; the prior records were never flipped to is_in_latest_file = false, so duplicate users persisted in Iterable and received outreach. Process-config issue, not a pipeline-integrity failure. P1 same-day mitigation, root-cause fix in flight (DE-6682 closed; tracked on the Iterable team).</li>
+    </ul>
+    <p style="margin-top:14px;"><em>One unique-key dbt test failure (DE-6682, billing span uniqueness) was caught and remediated before it reached billing reporting — a representative example of the test suite doing its job. Both Airflow incidents have follow-on platform hardening shipped (see "What you can act on") so the same conditions don't recur.</em></p>
+  </section>
+
+  <!-- CLIENTS SERVED -->
+  <section class="block tinted-peach">
+    <div class="section-head"><span class="pill">Client coverage</span></div>
+    <h2>Clients served</h2>
+    <p>15+ client accounts had specific data work touch their pipelines this month — across eligibility, billing, claims, and reporting.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>Named clients with shipped work</h4>
+        <p>Pangea (Wave 1 close + Wave 2 prep), IBX (live in Cube), Sequoia Multiprogram (company-ID filter), Aetna (RPM medical claims expansion), Alight (ATT manual members), Guitar Center (duplicate suppression + post-incident remediation), Valmont (claims-alert cleanup), Family Dollar, Tractor Supply, Red Bull, Corning, BD, Beacon, 7-Eleven, Dollar Tree, ADUSA, GE Appliances, SPX, Toyoda, Lumen, RPM (ROI analyses in motion).</p>
+      </div>
+      <div class="card">
+        <h4>ROI analytics throughput</h4>
+        <p>Family Dollar Y2 ROI completed (2.5:1, client meeting 4/20). Red Bull, Corning, and BD analyses in QA. Tractor Supply in revision. SPX, Toyoda, Lumen, and RPM blocked or pending data — actively triaged with client teams.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALWAYS ON -->
+  <section class="block">
+    <div class="section-head"><span class="pill">Always on</span></div>
+    <h2>The work that runs whether you see it or not</h2>
+    <p>Operational work that keeps everything else above this line possible.</p>
+
+    <div class="always-grid">
+      <div class="row">
+        <div class="icon">8</div>
+        <div>
+          <h4>On-call rotation</h4>
+          <p>Eight monitoring channels covered, every sprint. April: 3 incidents triaged, 2 resolved same-day, 1 in flight.</p>
         </div>
-        <div class="outcome-list">
-          <div class="outcome-item">
-            <strong>Four sprint automations shipped and running</strong>
-            <span>Monthly impact report, sprint kickoff, sprint wrap-up, and pre-grooming briefing are now fully automated. See AI Corner below.</span>
-          </div>
-          <div class="outcome-item">
-            <strong>Claims data strategy — workshop completed</strong>
-            <span>The team attended a claims data workshop to align on data standards, intake processes, and how claims data feeds into reporting and client deliverables. <a href="https://docs.google.com/document/d/1EfQV5yEJemP-U9eSa5ei1MOhGPcVwnp9/edit" style="color:var(--maroon); font-weight:600;">View workshop notes →</a></span>
-          </div>
+      </div>
+      <div class="row">
+        <div class="icon">15m</div>
+        <div>
+          <h4>dbt pipelines</h4>
+          <p>Production models running on a 15-minute cadence with the test suite enforced on every run.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="icon">$</div>
+        <div>
+          <h4>Billing engine</h4>
+          <p>Renewal-billing eligibility logic updated for lifecycle campaigns (DE-6615). Mini Billing TaskForce continued weekly.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="icon">↻</div>
+        <div>
+          <h4>Release train</h4>
+          <p>Weekly grooming + sprint sessions, deployment standups, sanitized dev pipeline access maintained (DE-6690), Iterable SSH tunnel restored (DE-6696).</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 2: READY FOR ACTIVATION -->
-  <section>
-    <div class="section-label">Ready for activation — data team's work is done</div>
-    <div class="card">
-      <div class="card-title">⏳ Delivered. Waiting on the next step.</div>
-      <div class="card-subtitle">These are complete on the data side. The next action belongs to another team — adoption, sign-off, or activation.</div>
-      <div class="activation-list">
-        <div class="activation-item">
-          <span class="activation-pill pill-growth">Growth</span>
-          <div class="activation-body">
-            <strong>Pangea member targeting via Iterable Smart Sync — in review</strong>
-            <span>Iterable Smart Sync implementation for the Pangea member marketing feed is in review — replacing Census for this feed and eliminating a vendor dependency. If this holds, additional Census feeds migrate to Smart Sync with possible non-renewal in the fall.</span>
-          </div>
-        </div>
-        <div class="activation-item">
-          <span class="activation-pill pill-growth">Growth</span>
-          <div class="activation-body">
-            <strong>Duplicate profile suppression logic delivered for incentive campaigns</strong>
-            <span>Flagging logic shipped. Growth team to validate suppression lists against active campaign audiences before next send.</span>
-          </div>
-        </div>
-        <div class="activation-item">
-          <span class="activation-pill pill-data">Client Ops</span>
-          <div class="activation-body">
-            <strong>Chicago Public Schools supplemental email file ingestion live</strong>
-            <span>Pipeline built and data loaded. Client-facing team can now proceed with eligibility validation for this account.</span>
-          </div>
-        </div>
-        <div class="activation-item">
-          <span class="activation-pill pill-product">Analytics</span>
-          <div class="activation-body">
-            <strong>Pangea Wave 2 analytical layer — model builds in progress</strong>
-            <span>Additional data sources mapped. Analytical model builds begin this week, followed by metric calculations. Pangea client reporting will be ready for activation once modeling is complete.</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- WHAT'S COMING -->
+  <section class="block tinted-cream">
+    <div class="section-head"><span class="pill">Next month</span></div>
+    <h2>What's coming in May</h2>
+    <p>Where the team's focus shifts next.</p>
+
+    <ul class="clean">
+      <li><strong>Pangea Wave 2 — analytical layer.</strong> Build the analytical models that sit on top of the Pangea source layer, then layer in metric calculations that drive client reporting.</li>
+      <li><strong>Galapagos data foundation.</strong> Begin the data architecture and integration work that unblocks the Galapagos client launch. Sequenced as the next major client milestone after Pangea.</li>
+      <li><strong>Cube UAT Wave 2 + Looker cutover prep.</strong> Onboard the next cohort of Cube users, close the remaining semantic-layer gaps, and hold the line on a clean, gradual Looker decommission.</li>
+      <li><strong>Eligibility refactor — kickoff.</strong> Begin the foundational rework of how eligibility data is processed and managed, so the system scales as the book of business grows.</li>
+      <li><strong>In-house data sanitization (post-Tonic Structural).</strong> Tonic Structural is not being renewed. The team is building an in-house sanitization solution that will better serve the data team and Galapagos. Tonic Textual will be renewed.</li>
+      <li><strong>Hiring.</strong> Active interview loop for Data Analytics Engineer (Gianluca Artusa, Michael Han, Isaiah LeBlanc all in process).</li>
+    </ul>
   </section>
 
-  <!-- SECTION 3: WHAT WE CAUGHT -->
-  <section>
-    <div class="section-label">What we caught</div>
-    <div class="quality-card">
-      <div class="card-title">🛡️ Data quality — before it reached you</div>
-      <div class="card-subtitle">We run a dbt test suite that automatically validates data integrity on every pipeline run — catching bad values, duplicates, and integrity failures at the source before they reach any report or dashboard. These are tracked in Jira and actioned every sprint.</div>
-      <div class="quality-stats">
-        <div class="q-stat">
-          <div class="q-stat-num green">16</div>
-          <div class="q-stat-label">dbt test failures caught &amp; resolved — never reached a dashboard</div>
-        </div>
-        <div class="q-stat">
-          <div class="q-stat-num yellow">0</div>
-          <div class="q-stat-label">Issues reported externally from our pipelines</div>
-        </div>
-        <div class="q-stat">
-          <div class="q-stat-num blue">16 of 16</div>
-          <div class="q-stat-label">Resolved before any stakeholder impact</div>
-        </div>
-      </div>
-      <div class="incident-list">
-        <div class="incident-row resolved">
-          <div class="incident-title">Billing &amp; Member Data Integrity — 16 dbt Tests Triggered and Resolved</div>
-          <div class="incident-meta">
-            <span class="incident-tag tag-resolved">Internal detection</span>
-            <span class="incident-tag tag-sprint">Resolved within sprint</span>
-            <span class="incident-tag tag-resolved">Zero external impact</span>
-          </div>
-          <div class="incident-desc">Tests covered billing span uniqueness, member event keys, enrollment feed integrity, registration events, tobacco surcharge outliers, provider appointment accuracy, alcohol member records, billable activity validation, and billing year boundaries. Every issue was caught by the test suite, triaged, and resolved before reaching any dashboard or report. This is the quality system working exactly as designed.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 4: CLIENTS SERVED -->
-  <section>
-    <div class="section-label">Clients served this month</div>
-    <div class="card">
-      <div class="card-title">🤝 Active client work in April</div>
-      <div class="card-subtitle">Every client below had specific data work completed this month — eligibility, billing, data feeds, claims, or reporting.</div>
-      <div class="client-grid">
-        <span class="client-chip">Amazon</span>
-        <span class="client-chip">IBX</span>
-        <span class="client-chip">RPM International</span>
-        <span class="client-chip">KnitWell</span>
-        <span class="client-chip">Alex Lee</span>
-        <span class="client-chip">Costco</span>
-        <span class="client-chip">AT&amp;T / Alight</span>
-        <span class="client-chip">Chicago Public Schools</span>
-        <span class="client-chip">Tractor Supply</span>
-        <span class="client-chip">Guitar Center</span>
-        <span class="client-chip">CVS / ADM</span>
-        <span class="client-chip">Perdue Farms</span>
-        <span class="client-chip">Yanfeng</span>
-        <span class="client-chip">7-Eleven / Aptia</span>
-        <span class="client-chip">Toyoda Gosei</span>
-        <span class="client-chip">SPX / Business Solver</span>
-        <span class="client-chip">Sequoia</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 5: ALWAYS ON -->
-  <section>
-    <div class="section-label">Always on — what runs beneath everything</div>
-    <div class="always-on">
-      <div class="card-title">⚙️ The platform your business runs on</div>
-      <div class="card-subtitle">This work doesn't ship in a sprint announcement. It runs every day, every sprint, and every time a new client or contract comes in. It's the reason the lights stay on.</div>
-      <div class="ops-grid">
-        <div class="ops-card">
-          <div class="ops-icon">⚡</div>
-          <div class="ops-name">dbt Pipeline — 15-min + Daily</div>
-          <div class="ops-desc">Critical 15-minute dbt jobs power the member registration pipeline. Any failure is a P0 — resolved before business hours.</div>
-          <div class="ops-pulse">Running continuously</div>
-        </div>
-        <div class="ops-card">
-          <div class="ops-icon">🔁</div>
-          <div class="ops-name">On-Call Rotation</div>
-          <div class="ops-desc">One engineer holds the pager every sprint, monitoring 8+ Airflow alert channels: dbt, eligibility, billing, claims, Iterable, Airbyte, and more.</div>
-          <div class="ops-pulse">Every sprint</div>
-        </div>
-        <div class="ops-card">
-          <div class="ops-icon">🚂</div>
-          <div class="ops-name">Release Train — Tue &amp; Thu only</div>
-          <div class="ops-desc">All production deploys happen on a controlled Tuesday/Thursday schedule — reducing risk and giving the business predictable delivery windows.</div>
-          <div class="ops-pulse">2× per week</div>
-        </div>
-        <div class="ops-card">
-          <div class="ops-icon">💳</div>
-          <div class="ops-name">Billing Engine</div>
-          <div class="ops-desc">Custom billing logic updated for every new client contract and every change to an existing client's billing rules. Pangea billing engine QA'd this month.</div>
-          <div class="ops-pulse">Updated continuously</div>
-        </div>
-        <div class="ops-card">
-          <div class="ops-icon">🔌</div>
-          <div class="ops-name">Active Integrations Maintained</div>
-          <div class="ops-desc">Airflow, Iterable, Census, Typeform, Aetna, Redshift, Amplitude — all monitored, maintained, and migrated to new datashare architecture this month.</div>
-          <div class="ops-pulse">Always monitored</div>
-        </div>
-        <div class="ops-card">
-          <div class="ops-icon">📊</div>
-          <div class="ops-name">DW Health Digest</div>
-          <div class="ops-desc">Daily 8am Airflow DAG posts pipeline health summary to #airflow-alerts-general — proactive monitoring before the business day begins. In final review.</div>
-          <div class="ops-pulse">Launching soon</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI CORNER -->
-  <section>
-    <div class="section-label">AI Corner — automation &amp; intelligence</div>
-    <div class="ai-card">
-      <div class="card-title">🤖 Where we're using AI to work smarter</div>
-      <div class="card-subtitle">Work completed or in progress this month tagged data-ai-opp — cases where the team applied automation or AI-assisted approaches to reduce manual work, catch issues earlier, or improve how we operate.</div>
-      <div class="ai-grid">
-        <div class="ai-item">
-          <span class="ai-status ai-done">Live</span>
-          <div class="ai-body">
-            <strong>Monthly Data Impact Report — fully automated</strong>
-            <span>End-to-end automation: pulls Jira tickets, Notion incident log, and Granola meeting notes, generates the HTML impact page, updates the landing index, and drafts the Slack message — all staged for review before anything is posted. You're reading the output right now.</span>
-          </div>
-        </div>
-        <div class="ai-item">
-          <span class="ai-status ai-done">Live</span>
-          <div class="ai-body">
-            <strong>Sprint wrap-up automation</strong>
-            <span>Automatically summarizes completed sprint work at the end of each sprint and prepares a Slack draft for the data team channel — reviewed before posting.</span>
-          </div>
-        </div>
-        <div class="ai-item">
-          <span class="ai-status ai-done">Live</span>
-          <div class="ai-body">
-            <strong>Sprint kickoff automation</strong>
-            <span>Pulls the active sprint and goals from Jira at the start of each sprint and drafts a kickoff message for review — reducing prep time from 30+ minutes to near zero.</span>
-          </div>
-        </div>
-        <div class="ai-item">
-          <span class="ai-status ai-done">Live</span>
-          <div class="ai-body">
-            <strong>Pre-grooming ticket briefing</strong>
-            <span>Every Wednesday, a briefing is posted to #data-team-jira flagging tickets with missing story points, stale estimates, and over-commitment risks — giving the team a head start before Thursday grooming.</span>
-          </div>
-        </div>
-        <div class="ai-item">
-          <span class="ai-status ai-review">In Review</span>
-          <div class="ai-body">
-            <strong>DW Health Digest — daily pipeline health summary</strong>
-            <span>Automated daily digest posting Airflow pipeline health to #airflow-alerts-general at 8am, before the business day begins. Enables proactive response before issues escalate.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- SECTION 6: WHAT'S COMING -->
-  <section>
-    <div class="section-label">What's coming in May</div>
-    <div class="next-card">
-      <div class="card-title">⏭️ On deck</div>
-      <div class="card-subtitle">May builds on Pangea Wave 1 completion and opens the next client milestone — Galapagos.</div>
-
-      <!-- Cube progress bar -->
-      <div class="cube-bar-wrap" style="margin-bottom:28px;">
-        <div class="cube-phases">
-          <span class="phase-badge phase-done">Phase 0: Initiation ✓</span>
-          <span class="phase-badge phase-done">Phase 1: Setup ✓</span>
-          <span class="phase-badge phase-done">Phase 2: Semantic Layer ✓</span>
-          <span class="phase-badge phase-done">Phase 3: Reporting Assets ✓</span>
-          <span class="phase-badge phase-active">Phase 4: Rollout ← UAT Wave 2</span>
-          <span class="phase-badge phase-next">Phase 5: Migration</span>
-        </div>
-        <div class="cube-bar"><div class="cube-bar-fill"></div></div>
-        <div class="cube-bar-label">Cube migration — ~72% complete. UAT Wave 2 onboarding next week.</div>
-      </div>
-
-      <!-- Notable changes callout -->
-      <div style="margin-bottom:28px; display:flex; flex-direction:column; gap:10px; position:relative; z-index:1;">
-        <div style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:4px;">Notable changes</div>
-        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-left:3px solid var(--yello); border-radius:10px; padding:14px 18px;">
-          <div style="font-size:13px; font-weight:600; color:var(--white); margin-bottom:3px;">Tonic Structural will not be renewed</div>
-          <div style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.6;">The in-house dev-sanitized solution is in review, with the production solution actively in development. This replaces Structural to support the data team and Galapagos / product engineering. Tonic Textual renews. Reduces vendor dependency and spend while giving us a purpose-built solution.</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-left:3px solid var(--cerulean); border-radius:10px; padding:14px 18px;">
-          <div style="font-size:13px; font-weight:600; color:var(--white); margin-bottom:3px;">Cube is now available — see the walkthrough</div>
-          <div style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.6;">If you haven't seen the Cube announcement yet, the walkthrough covers what's available today and how to request access. <a href="https://danamabend.github.io/pelago-data-updates/cube-announcement.html" style="color:var(--cerulean); text-decoration:none; font-weight:600;">View the Cube launch announcement →</a></div>
-        </div>
-      </div>
-
-      <div class="next-list">
-        <div class="next-item">
-          <div class="next-num">1</div>
-          <div class="next-body">
-            <strong>Pangea Wave 2 — analytical layer and client reporting</strong>
-            <span>Analytical model builds and metric calculations deliver Pangea client reporting. This is the shift from infrastructure delivery to business value realization.</span>
-          </div>
-        </div>
-        <div class="next-item">
-          <div class="next-num">2</div>
-          <div class="next-body">
-            <strong>Galapagos data architecture begins</strong>
-            <span>Data architecture and integration work starts as the product initiative advances. Galapagos is the next major client milestone after Pangea.</span>
-          </div>
-        </div>
-        <div class="next-item">
-          <div class="next-num">3</div>
-          <div class="next-body">
-            <strong>Cube UAT Wave 2 — broader rollout</strong>
-            <span>New cohort of users onboarding. Remaining semantic layer gaps closed ahead of Looker cutover. The goal: reduce ad hoc data requests by enabling teams to answer their own questions.</span>
-          </div>
-        </div>
-        <div class="next-item">
-          <div class="next-num">4</div>
-          <div class="next-body">
-            <strong>Looker contract renewal — May</strong>
-            <span>Entering negotiations with a right-sized license footprint following April's audit and seat consolidation.</span>
-          </div>
-        </div>
-        <div class="next-item">
-          <div class="next-num">5</div>
-          <div class="next-body">
-            <strong>Eligibility refactor begins</strong>
-            <span>Foundational work to simplify how we process and manage client eligibility data — reducing maintenance burden as the book of business grows.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <p><strong>Pelago</strong> Data Team &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; Internal &nbsp;·&nbsp; <a href="index.html">← All updates</a></p>
-</footer>
-
+  <footer>
+    <div class="logo">Pelago · Data Team</div>
+    <div>April 2026 · Generated April 28, 2026 · Internal — review before sharing</div>
+  </footer>
+</div>
 </body>
 </html>
